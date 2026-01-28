@@ -34,9 +34,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History Summary
 
-| Version | Date | Highlights |
-|---------|------|------------|
-| 0.1.0 | TBD | Initial release with core hotkey functionality |
+| Version | Date | Highlights                                      |
+| ------- | ---- | ----------------------------------------------- |
+| 0.1.0   | TBD  | Initial release with core hotkey functionality |
 
 ---
 

@@ -71,11 +71,11 @@ Development plans for Guild Wars 2 Addons.
 
 ### Future Addon Ideas
 
-| Idea | Description | Priority |
-|------|-------------|----------|
-| Auto-Deposit on Map Change | Trigger deposit when changing maps | Low |
-| Inventory Presets | Save/restore inventory layouts | Low |
-| Quick Sell | Hotkey to sell junk items | Medium |
+| Idea                       | Description                          | Priority |
+| -------------------------- | ------------------------------------ | -------- |
+| Auto-Deposit on Map Change | Trigger deposit when changing maps   | Low      |
+| Inventory Presets          | Save/restore inventory layouts       | Low      |
+| Quick Sell                 | Hotkey to sell junk items            | Medium   |
 
 ---
 
@@ -87,7 +87,11 @@ Development plans for Guild Wars 2 Addons.
 - [x] Confirm feasibility of input simulation
 - [x] Create repository structure
 - [x] Document development approach
+- [x] Create agents.md with Nexus development patterns
+- [x] Create C++ source structure (entry.cpp, shared.h)
+- [x] Set up changelog with version tracking
+- [x] Push initial repository to GitHub
 
 ---
 
-*Roadmap for Guild Wars 2 Addons - Updated January 2026*
+Roadmap for Guild Wars 2 Addons - Updated January 2026

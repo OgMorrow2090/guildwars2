@@ -34,10 +34,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History Summary
 
-| Version | Date | Highlights                                      |
-| ------- | ---- | ----------------------------------------------- |
+| Version | Date | Highlights                                     |
+| ------- | ---- | ---------------------------------------------- |
 | 0.1.0   | TBD  | Initial release with core hotkey functionality |
 
 ---
 
-*Changelog for Guild Wars 2 Addons*
+Changelog for Guild Wars 2 Addons

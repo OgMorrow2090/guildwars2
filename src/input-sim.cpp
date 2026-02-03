@@ -77,7 +77,15 @@ void SimulateRightClickAt(int x, int y)
     
     LPARAM lParam = MAKELPARAM(x, y);
     
+    // Move mouse to position first
+    APIDefs->WndProc_SendToGameOnly(GameWindow, WM_MOUSEMOVE, 0, lParam);
+    
+    // Small delay to let game register position
+    Sleep(10);
+    
+    // Right click
     APIDefs->WndProc_SendToGameOnly(GameWindow, WM_RBUTTONDOWN, MK_RBUTTON, lParam);
+    Sleep(10);
     APIDefs->WndProc_SendToGameOnly(GameWindow, WM_RBUTTONUP, 0, lParam);
 }
 

@@ -2,29 +2,37 @@
 
 Development plans for Guild Wars 2 Addons.
 
-## 🎯 Current Focus: Inventory Hotkeys Addon
+## ✅ Completed: Inventory Hotkeys Addon v1.0.0
 
-### Phase 1: Foundation (v0.1.0)
+### Phase 1: Foundation ✅
 
-- [ ] **Development Environment**
-  - [ ] Set up Visual Studio 2022 project
-  - [ ] Configure Nexus API header
-  - [ ] Create basic DLL structure
-  - [ ] Test addon loading in game
+- [x] **Development Environment**
+  - [x] Set up Visual Studio 2025 project (Platform Toolset v145)
+  - [x] Configure Nexus API header
+  - [x] Create basic DLL structure
+  - [x] Test addon loading in game
 
-- [ ] **Core Keybind System**
-  - [ ] Implement `GetAddonDef()` export
-  - [ ] Register keybinds for Deposit Materials
-  - [ ] Register keybinds for Sort Inventory
-  - [ ] Implement `ProcessKeybind()` handler
+- [x] **Core Keybind System**
+  - [x] Implement `GetAddonDef()` export
+  - [x] Register keybinds for Deposit Materials (Ctrl+D)
+  - [x] Register keybinds for Sort Inventory (Ctrl+S)
+  - [x] Register keybinds for Bouncy Chest (Ctrl+B)
+  - [x] Register combo keybind Deposit+Sort (Ctrl+Q)
+  - [x] Implement `ProcessKeybind()` handler
 
-- [ ] **Input Simulation**
-  - [ ] Research button position detection
-  - [ ] Implement `SendWndProcToGameOnly()` wrapper
-  - [ ] Calculate inventory button positions
-  - [ ] Test click simulation in game
+- [x] **Input Simulation**
+  - [x] Implement `WndProc_SendToGameOnly()` wrapper
+  - [x] Left-click simulation for deposit/sort
+  - [x] Right-click simulation for bouncy chest
+  - [x] Combo action with delay between clicks
 
-### Phase 2: Polish (v0.2.0)
+- [x] **Position Capture System**
+  - [x] Capture keybinds (Ctrl+Shift+D/S/B)
+  - [x] Auto-save to config file
+  - [x] Load positions on addon startup
+  - [x] Create config directory if missing
+
+### Phase 2: Polish (Future)
 
 - [ ] **UI Scaling Support**
   - [ ] Read MumbleLink UI size setting
@@ -33,37 +41,22 @@ Development plans for Guild Wars 2 Addons.
 
 - [ ] **Options Panel**
   - [ ] Create ImGui options interface
-  - [ ] Display current keybind settings
-  - [ ] Show addon status/feedback
+  - [ ] Display current position values
+  - [ ] Reset to defaults button
 
 - [ ] **Quick Access Integration**
   - [ ] Create addon icons (normal + hover)
   - [ ] Add shortcut to Nexus menu bar
-  - [ ] Implement icon click handlers
 
-### Phase 3: Advanced Features (v0.3.0)
+### Phase 3: Advanced Features (Future)
 
 - [ ] **Inventory State Detection**
   - [ ] Detect if inventory is open
   - [ ] Show warning if inventory closed
-  - [ ] Optional auto-open inventory
 
 - [ ] **Additional Hotkeys**
-  - [ ] Salvage all (if feasible)
-  - [ ] Consume all (if feasible)
   - [ ] Custom action triggers
-
-### Phase 4: Release (v1.0.0)
-
-- [ ] **Testing & Stability**
-  - [ ] Comprehensive testing across game modes
-  - [ ] Memory leak verification
-  - [ ] Performance optimization
-
-- [ ] **Distribution**
-  - [ ] Create GitHub releases
-  - [ ] Write user documentation
-  - [ ] Consider Raidcore addon library submission
+  - [ ] More combo sequences
 
 ---
 
@@ -71,15 +64,26 @@ Development plans for Guild Wars 2 Addons.
 
 ### Future Addon Ideas
 
-| Idea                       | Description                          | Priority |
-| -------------------------- | ------------------------------------ | -------- |
-| Auto-Deposit on Map Change | Trigger deposit when changing maps   | Low      |
-| Inventory Presets          | Save/restore inventory layouts       | Low      |
-| Quick Sell                 | Hotkey to sell junk items            | Medium   |
+| Idea                       | Description                        | Priority |
+| -------------------------- | ---------------------------------- | -------- |
+| Auto-Deposit on Map Change | Trigger deposit when changing maps | Low      |
+| Inventory Presets          | Save/restore inventory layouts     | Low      |
+| Quick Sell                 | Hotkey to sell junk items          | Medium   |
 
 ---
 
 ## ✅ Completed
+
+### February 2026
+
+- [x] v1.0.0 release with full functionality
+- [x] Deposit Materials hotkey (Ctrl+D)
+- [x] Sort Inventory hotkey (Ctrl+S)
+- [x] Bouncy Chest hotkey (Ctrl+B)
+- [x] Deposit + Sort combo (Ctrl+Q)
+- [x] Position capture system (Ctrl+Shift+D/S/B)
+- [x] Config file persistence
+- [x] Nexus keybind UI integration
 
 ### January 2026
 
@@ -88,10 +92,10 @@ Development plans for Guild Wars 2 Addons.
 - [x] Create repository structure
 - [x] Document development approach
 - [x] Create agents.md with Nexus development patterns
-- [x] Create C++ source structure (entry.cpp, shared.h)
+- [x] Create C++ source structure
 - [x] Set up changelog with version tracking
 - [x] Push initial repository to GitHub
 
 ---
 
-Roadmap for Guild Wars 2 Addons - Updated January 2026
+Roadmap for Guild Wars 2 Addons - Updated February 2026

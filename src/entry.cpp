@@ -12,12 +12,12 @@
 #include <cstring>
 
 // Global state
-AddonAPI* APIDefs = nullptr;
-AddonDefinition AddonDef{};
+AddonAPI_t* APIDefs = nullptr;
+AddonDefinition_t AddonDef{};
 HWND GameWindow = nullptr;
 
 // Forward declarations
-void AddonLoad(AddonAPI* aApi);
+void AddonLoad(AddonAPI_t* aApi);
 void AddonUnload();
 
 /**
@@ -45,7 +45,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
  * Nexus calls this function to get addon metadata and callbacks.
  * Must be exported as a C function (no name mangling).
  */
-extern "C" __declspec(dllexport) AddonDefinition* GetAddonDef()
+extern "C" __declspec(dllexport) AddonDefinition_t* GetAddonDef()
 {
     // Signature must be unique and negative for non-Raidcore addons
     AddonDef.Signature = -54321;
@@ -65,10 +65,10 @@ extern "C" __declspec(dllexport) AddonDefinition* GetAddonDef()
     AddonDef.Unload = AddonUnload;
     
     // Optional features
-    AddonDef.Flags = EAddonFlags::None;
+    AddonDef.Flags = AF_None;
     
     // Auto-update from GitHub releases
-    AddonDef.Provider = EUpdateProvider::GitHub;
+    AddonDef.Provider = UP_GitHub;
     AddonDef.UpdateLink = "https://github.com/OgMorrow2090/guildwars2";
     
     return &AddonDef;
@@ -79,37 +79,83 @@ extern "C" __declspec(dllexport) AddonDefinition* GetAddonDef()
  * 
  * Initialize addon state and register keybinds.
  */
-void AddonLoad(AddonAPI* aApi)
+void AddonLoad(AddonAPI_t* aApi)
 {
     APIDefs = aApi;
     
+    // Set config path and load saved positions
+    SetConfigPath(APIDefs->Paths_GetAddonDirectory("InventoryHotkeys"));
+    LoadButtonPositions();
+    
     // Get game window handle for input simulation
-    GameWindow = APIDefs->GameHandle;
+    // Try multiple window class names that GW2 might use
+    GameWindow = FindWindowA("ArenaNet_Dx_Window_Class", nullptr);
+    if (GameWindow == nullptr)
+    {
+        GameWindow = FindWindowA("ArenaNet_Gr_Window_Class", nullptr);
+    }
+    if (GameWindow == nullptr)
+    {
+        // Try finding by window title
+        GameWindow = FindWindowA(nullptr, "Guild Wars 2");
+    }
+    if (GameWindow == nullptr)
+    {
+        // Last resort: get foreground window (will be set on first keybind press)
+        APIDefs->Log(LOGL_WARNING, "InventoryHotkeys", "Game window not found at load - will try on keybind press");
+    }
+    else
+    {
+        APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Game window found successfully!");
+    }
     
-    // Set up ImGui context (required for any ImGui rendering)
-    ImGui::SetCurrentContext((ImGuiContext*)APIDefs->ImguiContext);
-    ImGui::SetAllocatorFunctions(
-        (void* (*)(size_t, void*))APIDefs->ImguiMalloc,
-        (void(*)(void*, void*))APIDefs->ImguiFree
-    );
-    
-    // Register keybinds with default keys
-    // Users can customize these in Nexus Options (Ctrl+O)
-    APIDefs->RegisterKeybindWithString(
+    // === ACTION KEYBINDS ===
+    APIDefs->InputBinds_RegisterWithString(
         KB_DEPOSIT_MATERIALS, 
         ProcessKeybind, 
         "CTRL+D"
     );
     
-    APIDefs->RegisterKeybindWithString(
+    APIDefs->InputBinds_RegisterWithString(
         KB_SORT_INVENTORY, 
         ProcessKeybind, 
-        "CTRL+SHIFT+S"
+        "CTRL+C"
     );
     
-    APIDefs->Log(ELogLevel_INFO, "InventoryHotkeys", "Addon loaded successfully!");
-    APIDefs->Log(ELogLevel_INFO, "InventoryHotkeys", "Deposit Materials: Ctrl+D");
-    APIDefs->Log(ELogLevel_INFO, "InventoryHotkeys", "Sort Inventory: Ctrl+Shift+S");
+    APIDefs->InputBinds_RegisterWithString(
+        KB_OPEN_CHEST, 
+        ProcessKeybind, 
+        "CTRL+B"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_DEPOSIT_AND_SORT, 
+        ProcessKeybind, 
+        "CTRL+Q"
+    );
+    
+    // === CAPTURE KEYBINDS ===
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_DEPOSIT, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+D"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_SORT, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+C"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_CHEST, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+B"
+    );
+    
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Addon loaded!");
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Actions: Alt+D (Deposit), Alt+C (Compact), Alt+B (Chest)");
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Capture: Ctrl+Shift+D/C/B to set positions");
 }
 
 /**
@@ -120,10 +166,15 @@ void AddonLoad(AddonAPI* aApi)
 void AddonUnload()
 {
     // Deregister keybinds
-    APIDefs->DeregisterKeybind(KB_DEPOSIT_MATERIALS);
-    APIDefs->DeregisterKeybind(KB_SORT_INVENTORY);
+    APIDefs->InputBinds_Deregister(KB_DEPOSIT_MATERIALS);
+    APIDefs->InputBinds_Deregister(KB_SORT_INVENTORY);
+    APIDefs->InputBinds_Deregister(KB_OPEN_CHEST);
+    APIDefs->InputBinds_Deregister(KB_DEPOSIT_AND_SORT);
+    APIDefs->InputBinds_Deregister(KB_CAPTURE_DEPOSIT);
+    APIDefs->InputBinds_Deregister(KB_CAPTURE_SORT);
+    APIDefs->InputBinds_Deregister(KB_CAPTURE_CHEST);
     
-    APIDefs->Log(ELogLevel_INFO, "InventoryHotkeys", "Addon unloaded.");
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Addon unloaded.");
     
     // Clear global state
     APIDefs = nullptr;

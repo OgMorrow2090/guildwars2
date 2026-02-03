@@ -1,0 +1,27 @@
+# Visual Studio build outputs
+bin/
+obj/
+x64/
+Debug/
+Release/
+
+# Visual Studio user files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Build results
+*.dll
+*.pdb
+*.ilk
+*.exp
+*.lib
+
+# ImGui (not used in current implementation)
+include/imgui/
+
+# OS files
+Thumbs.db
+.DS_Store

@@ -7,102 +7,181 @@
  * Author: OgMorrow2090
  * Repository: https://github.com/OgMorrow2090/guildwars2
  * 
- * NOTE: Button positions are currently hardcoded for 1920x1080 resolution
- * with default UI scale. Future versions will calculate positions dynamically
- * using MumbleLink UI scale data.
+ * Capture positions:
+ *   Ctrl+Shift+D = Deposit button
+ *   Ctrl+Shift+C = Compact/Sort button
+ *   Ctrl+Shift+B = Bouncy Chest
+ * 
+ * Actions:
+ *   Alt+D = Deposit Materials (left-click)
+ *   Alt+C = Compact/Sort (left-click)
+ *   Alt+B = Open Bouncy Chest (right-click)
  */
 
 #include "shared.h"
+#include <cstdio>
 
 // =============================================================================
-// Button Position Configuration
-// =============================================================================
-// 
-// These positions are relative to the inventory window which appears in the
-// bottom-right corner of the screen. Positions need adjustment for:
-// - Different screen resolutions
-// - Different UI scale settings (Small/Normal/Large/Larger)
-// - Inventory window position if moved
-//
-// TODO: Calculate dynamically using MumbleLink UISize and screen resolution
+// Helper: Find Game Window
 // =============================================================================
 
-// Hardcoded positions for 1920x1080 @ Normal UI scale
-// These will need to be determined through in-game testing
-namespace ButtonPositions
+static void EnsureGameWindow()
 {
-    // "Deposit All Materials" button (cog/gear icon in inventory)
-    // Position relative to screen - NEEDS TESTING
-    constexpr int DEPOSIT_X = 1800;  // Placeholder - needs actual position
-    constexpr int DEPOSIT_Y = 900;   // Placeholder - needs actual position
+    if (GameWindow != nullptr) return;
     
-    // "Compact" / Sort button in inventory
-    // Position relative to screen - NEEDS TESTING
-    constexpr int SORT_X = 1750;     // Placeholder - needs actual position
-    constexpr int SORT_Y = 900;      // Placeholder - needs actual position
+    GameWindow = FindWindowA("ArenaNet_Dx_Window_Class", nullptr);
+    if (GameWindow == nullptr)
+        GameWindow = FindWindowA("ArenaNet_Gr_Window_Class", nullptr);
+    if (GameWindow == nullptr)
+        GameWindow = FindWindowA(nullptr, "Guild Wars 2");
+    if (GameWindow == nullptr)
+    {
+        GameWindow = GetForegroundWindow();
+        APIDefs->Log(LOGL_WARNING, "InventoryHotkeys", "Using foreground window");
+    }
 }
 
+// =============================================================================
+// Click Simulation
+// =============================================================================
+
 /**
- * SimulateClickAt - Send mouse click at screen coordinates
- * 
- * Uses Nexus API to send WM_LBUTTONDOWN/UP messages directly to the game,
- * bypassing any addon hooks. This ensures the click reaches the game UI.
- * 
- * @param x - Screen X coordinate
- * @param y - Screen Y coordinate
+ * SimulateClickAt - Send LEFT mouse click at coordinates
  */
 void SimulateClickAt(int x, int y)
 {
+    EnsureGameWindow();
     if (GameWindow == nullptr)
     {
-        APIDefs->Log(ELogLevel_WARNING, "InventoryHotkeys", "Game window not available");
+        APIDefs->Log(LOGL_WARNING, "InventoryHotkeys", "Game window not available");
         return;
     }
     
-    // Pack coordinates into LPARAM (low word = x, high word = y)
     LPARAM lParam = MAKELPARAM(x, y);
     
-    // Send mouse button down
-    APIDefs->SendWndProcToGameOnly(
-        GameWindow,
-        WM_LBUTTONDOWN,
-        MK_LBUTTON,  // wParam: indicates left button is down
-        lParam
-    );
-    
-    // Small delay could be added here if needed, but typically not required
-    
-    // Send mouse button up
-    APIDefs->SendWndProcToGameOnly(
-        GameWindow,
-        WM_LBUTTONUP,
-        0,           // wParam: no buttons down
-        lParam
-    );
-    
-    APIDefs->Log(ELogLevel_DEBUG, "InventoryHotkeys", "Simulated click at (%d, %d)", x, y);
+    APIDefs->WndProc_SendToGameOnly(GameWindow, WM_LBUTTONDOWN, MK_LBUTTON, lParam);
+    APIDefs->WndProc_SendToGameOnly(GameWindow, WM_LBUTTONUP, 0, lParam);
 }
 
 /**
- * SimulateDepositMaterialsClick - Click the "Deposit All Materials" button
- * 
- * Sends a mouse click to the deposit materials button position.
- * Requires inventory to be open for the button to be visible.
+ * SimulateRightClickAt - Send RIGHT mouse click at coordinates
  */
+void SimulateRightClickAt(int x, int y)
+{
+    EnsureGameWindow();
+    if (GameWindow == nullptr)
+    {
+        APIDefs->Log(LOGL_WARNING, "InventoryHotkeys", "Game window not available");
+        return;
+    }
+    
+    LPARAM lParam = MAKELPARAM(x, y);
+    
+    APIDefs->WndProc_SendToGameOnly(GameWindow, WM_RBUTTONDOWN, MK_RBUTTON, lParam);
+    APIDefs->WndProc_SendToGameOnly(GameWindow, WM_RBUTTONUP, 0, lParam);
+}
+
+// =============================================================================
+// Action Functions
+// =============================================================================
+
 void SimulateDepositMaterialsClick()
 {
-    APIDefs->Log(ELogLevel_INFO, "InventoryHotkeys", "Clicking Deposit Materials button");
-    SimulateClickAt(ButtonPositions::DEPOSIT_X, ButtonPositions::DEPOSIT_Y);
+    if (g_DepositX == 0 && g_DepositY == 0)
+    {
+        APIDefs->GUI_SendAlert("Deposit position not set! Use Ctrl+Shift+D to capture");
+        return;
+    }
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Clicking Deposit Materials");
+    SimulateClickAt(g_DepositX, g_DepositY);
 }
 
-/**
- * SimulateSortInventoryClick - Click the "Compact/Sort" button
- * 
- * Sends a mouse click to the sort/compact button position.
- * Requires inventory to be open for the button to be visible.
- */
 void SimulateSortInventoryClick()
 {
-    APIDefs->Log(ELogLevel_INFO, "InventoryHotkeys", "Clicking Sort Inventory button");
-    SimulateClickAt(ButtonPositions::SORT_X, ButtonPositions::SORT_Y);
+    if (g_SortX == 0 && g_SortY == 0)
+    {
+        APIDefs->GUI_SendAlert("Sort position not set! Use Ctrl+Shift+C to capture");
+        return;
+    }
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Clicking Sort/Compact");
+    SimulateClickAt(g_SortX, g_SortY);
+}
+
+void SimulateOpenChestClick()
+{
+    if (g_ChestX == 0 && g_ChestY == 0)
+    {
+        APIDefs->GUI_SendAlert("Chest position not set! Use Ctrl+Shift+B to capture");
+        return;
+    }
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Right-clicking Bouncy Chest");
+    SimulateRightClickAt(g_ChestX, g_ChestY);
+}
+
+void SimulateDepositAndSort()
+{
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Combo: Deposit + Sort");
+    
+    // First deposit
+    if (g_DepositX != 0 || g_DepositY != 0)
+    {
+        SimulateClickAt(g_DepositX, g_DepositY);
+    }
+    
+    // Small delay then sort
+    Sleep(100);
+    
+    if (g_SortX != 0 || g_SortY != 0)
+    {
+        SimulateClickAt(g_SortX, g_SortY);
+    }
+}
+
+// =============================================================================
+// Position Capture Functions
+// =============================================================================
+
+static void CapturePosition(int& outX, int& outY, const char* name)
+{
+    EnsureGameWindow();
+    
+    POINT pt;
+    if (GetCursorPos(&pt))
+    {
+        if (GameWindow != nullptr)
+        {
+            ScreenToClient(GameWindow, &pt);
+        }
+        
+        outX = pt.x;
+        outY = pt.y;
+        
+        char buffer[128];
+        sprintf_s(buffer, "%s captured: (%d, %d) - Saved!", name, pt.x, pt.y);
+        APIDefs->Log(LOGL_INFO, "InventoryHotkeys", buffer);
+        APIDefs->GUI_SendAlert(buffer);
+        
+        // Auto-save after each capture
+        SaveButtonPositions();
+    }
+    else
+    {
+        APIDefs->Log(LOGL_WARNING, "InventoryHotkeys", "Failed to get cursor position");
+        APIDefs->GUI_SendAlert("Failed to capture position!");
+    }
+}
+
+void CaptureDepositPosition()
+{
+    CapturePosition(g_DepositX, g_DepositY, "DEPOSIT");
+}
+
+void CaptureSortPosition()
+{
+    CapturePosition(g_SortX, g_SortY, "SORT/COMPACT");
+}
+
+void CaptureChestPosition()
+{
+    CapturePosition(g_ChestX, g_ChestY, "BOUNCY CHEST");
 }

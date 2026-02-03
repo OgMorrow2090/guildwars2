@@ -2,34 +2,71 @@
 
 Nexus addon development for Guild Wars 2 quality-of-life improvements.
 
-## 🎯 Current Projects
+## 🎯 Inventory Hotkeys Addon
 
-### Inventory Hotkeys Addon
+Adds configurable hotkeys for inventory management actions that normally require clicking.
 
-Adds configurable hotkeys for inventory management actions that normally require clicking:
+### Features
 
-- **Deposit All Materials** - Hotkey to deposit all crafting materials to bank
-- **Compact/Sort Inventory** - Hotkey to sort and compact inventory items
+- **Deposit All Materials** - Left-click the deposit button
+- **Compact/Sort Inventory** - Left-click the sort button
+- **Open Bouncy Chest** - Right-click to open bouncy chests
+
+### Keybinds
+
+| Action | Default Key | Description |
+| ------ | ----------- | ----------- |
+| **Deposit Materials** | Ctrl+D | Click deposit materials button |
+| **Compact/Sort** | Ctrl+S | Click sort/compact button |
+| **Open Chest** | Ctrl+B | Right-click bouncy chest |
+| **Deposit + Sort** | Ctrl+Q | Combo: deposit then sort |
+
+| Capture Position | Default Key | Description |
+| ---------------- | ----------- | ----------- |
+| **Capture Deposit** | Ctrl+Shift+D | Save deposit button location |
+| **Capture Sort** | Ctrl+Shift+S | Save sort button location |
+| **Capture Chest** | Ctrl+Shift+B | Save bouncy chest location |
+
+All keybinds can be customized in Nexus Options (Ctrl+O → Keybinds).
+
+### First-Time Setup
+
+1. Open inventory in GW2
+2. Hover mouse over **Deposit Materials** button → Press **Ctrl+Shift+D**
+3. Hover mouse over **Compact/Sort** button → Press **Ctrl+Shift+S**
+4. (Optional) Hover over a **Bouncy Chest** → Press **Ctrl+Shift+B**
+5. Positions are auto-saved to config file
+
+### Config File
+
+Positions are saved to:
+
+```text
+Guild Wars 2/addons/InventoryHotkeys/inventory-hotkeys.cfg
+```
 
 ## 📋 Status
 
-| Feature | Status | Description |
-|---------|--------|-------------|
-| Deposit Materials Hotkey | 🔬 Research | Keybind to trigger "Deposit All Materials" |
-| Sort Inventory Hotkey | 🔬 Research | Keybind to trigger inventory compact/sort |
-| Quick Access Integration | 📋 Planned | Icons in Nexus menu bar |
-| Configurable Keys | 📋 Planned | User-customizable hotkey bindings |
+| Feature | Status |
+| ------- | ------ |
+| Deposit Materials Hotkey | ✅ Working |
+| Sort Inventory Hotkey | ✅ Working |
+| Bouncy Chest Hotkey | ✅ Working |
+| Deposit + Sort Combo | ✅ Working |
+| Position Capture | ✅ Working |
+| Config Persistence | ✅ Working |
+| Nexus Keybind UI | ✅ Working |
 
 ## 🔧 Technical Stack
 
 - **Framework**: [Raidcore Nexus](https://github.com/RaidcoreGG/Nexus) addon loader
 - **Language**: C++ (Windows DLL)
-- **Build System**: Visual Studio 2022
-- **UI Framework**: ImGui (provided by Nexus)
+- **Build System**: Visual Studio 2025
+- **API Version**: Nexus API v6
 
 ## 📁 Repository Structure
 
-```
+```text
 guildwars2/
 ├── readme.md                 # This file
 ├── agents.md                 # AI agent development instructions
@@ -38,7 +75,8 @@ guildwars2/
 ├── src/                      # Source code
 │   ├── entry.cpp            # DLL entry point and addon definition
 │   ├── keybinds.cpp         # Hotkey registration and handlers
-│   ├── input_sim.cpp        # Mouse/keyboard input simulation
+│   ├── input-sim.cpp        # Mouse/keyboard input simulation
+│   ├── config.cpp           # Configuration file handling
 │   └── shared.h             # Shared state and API pointer
 ├── include/                  # External headers
 │   └── Nexus.h              # Nexus API definitions
@@ -70,13 +108,13 @@ See [docs/development-setup.md](docs/development-setup.md) for build instruction
 ## 📚 Resources
 
 | Resource | Link |
-|----------|------|
-| Nexus GitHub | https://github.com/RaidcoreGG/Nexus |
-| Nexus API Header | https://github.com/RaidcoreGG/RCGG-lib-nexus-api |
-| Nexus Wiki | https://github.com/RaidcoreGG/Nexus/wiki |
-| Example Addon | https://github.com/RaidcoreGG/GW2-Compass |
-| Raidcore Discord | https://discord.gg/Mvk7W7gjE4 |
-| This Repository | https://github.com/OgMorrow2090/guildwars2 |
+| -------- | ---- |
+| Nexus GitHub | [RaidcoreGG/Nexus](https://github.com/RaidcoreGG/Nexus) |
+| Nexus API Header | [RaidcoreGG/RCGG-lib-nexus-api](https://github.com/RaidcoreGG/RCGG-lib-nexus-api) |
+| Nexus Wiki | [Nexus Wiki](https://github.com/RaidcoreGG/Nexus/wiki) |
+| Example Addon | [GW2-Compass](https://github.com/RaidcoreGG/GW2-Compass) |
+| Raidcore Discord | [Discord Invite](https://discord.gg/Mvk7W7gjE4) |
+| This Repository | [OgMorrow2090/guildwars2](https://github.com/OgMorrow2090/guildwars2) |
 
 ## ⚖️ License
 

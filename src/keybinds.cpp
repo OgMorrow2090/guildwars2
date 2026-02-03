@@ -16,7 +16,7 @@
  * 
  * Called by Nexus when a registered keybind is pressed or released.
  * 
- * @param aIdentifier - The keybind identifier (e.g., "KB_DEPOSIT_MATERIALS")
+ * @param aIdentifier - The keybind identifier
  * @param aIsRelease - true if key was released, false if pressed
  */
 void ProcessKeybind(const char* aIdentifier, bool aIsRelease)
@@ -27,15 +27,34 @@ void ProcessKeybind(const char* aIdentifier, bool aIsRelease)
         return;
     }
     
-    // Route to appropriate handler
+    // === ACTION KEYBINDS ===
     if (strcmp(aIdentifier, KB_DEPOSIT_MATERIALS) == 0)
     {
-        APIDefs->Log(ELogLevel_DEBUG, "InventoryHotkeys", "Deposit Materials hotkey triggered");
         SimulateDepositMaterialsClick();
     }
     else if (strcmp(aIdentifier, KB_SORT_INVENTORY) == 0)
     {
-        APIDefs->Log(ELogLevel_DEBUG, "InventoryHotkeys", "Sort Inventory hotkey triggered");
         SimulateSortInventoryClick();
+    }
+    else if (strcmp(aIdentifier, KB_OPEN_CHEST) == 0)
+    {
+        SimulateOpenChestClick();
+    }
+    else if (strcmp(aIdentifier, KB_DEPOSIT_AND_SORT) == 0)
+    {
+        SimulateDepositAndSort();
+    }
+    // === CAPTURE KEYBINDS ===
+    else if (strcmp(aIdentifier, KB_CAPTURE_DEPOSIT) == 0)
+    {
+        CaptureDepositPosition();
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_SORT) == 0)
+    {
+        CaptureSortPosition();
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_CHEST) == 0)
+    {
+        CaptureChestPosition();
     }
 }

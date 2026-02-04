@@ -7,6 +7,27 @@ All notable changes to Guild Wars 2 Addons will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-02-04
+
+### Added
+
+- **Yes Dialog Hotkey** (Ctrl+P) - Click the Yes button on confirmation dialogs
+- **Mystic Forge Hotkey** (Ctrl+F) - Click the Mystic Forge combine button
+- **Mystic Refill Hotkey** (Ctrl+R) - Click the Mystic Forge refill button
+- **Mystic Forge Combo** (Ctrl+A) - Forge then Refill with 100ms delay
+- **Capture keybinds** for new hotkeys (Ctrl+Shift+P/F/R)
+
+### Changed
+
+- **Cleaner keybind names** - Removed "KB_" prefix from all keybind identifiers
+  - e.g., "KB_DEPOSIT_MATERIALS" → "DEPOSIT_MATERIALS"
+  - Requires re-binding keys in Nexus after update
+
+### Technical
+
+- Added 6 new position variables for Yes Dialog and Mystic Forge buttons
+- All positions saved per-resolution in config files
+
 ## [1.2.0] - 2026-02-04
 
 ### Added
@@ -75,6 +96,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Date       | Highlights                                      |
 | ------- | ---------- | ----------------------------------------------- |
+| 1.3.0   | 2026-02-04 | Yes Dialog, Mystic Forge hotkeys, cleaner names |
 | 1.2.0   | 2026-02-04 | Exit instance hotkey, 5 generic hotkeys         |
 | 1.1.0   | 2026-02-04 | Per-resolution configs, multi-device support    |
 | 1.0.0   | 2026-02-03 | Full release with all core features             |

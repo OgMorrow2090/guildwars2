@@ -17,18 +17,25 @@ Adds configurable hotkeys for inventory management actions that normally require
 | Action | Default Key | Description |
 | ------ | ----------- | ----------- |
 | **Deposit Materials** | Ctrl+D | Click deposit materials button |
-| **Compact/Sort** | Ctrl+S | Click sort/compact button |
+| **Compact/Sort** | Ctrl+C | Click sort/compact button |
 | **Open Chest** | Ctrl+B | Right-click bouncy chest |
 | **Deposit + Sort** | Ctrl+Q | Combo: deposit then sort |
 | **Exit Instance** | Ctrl+E | Click exit instance button |
-| **Generic 1-5** | Unassigned | User-assignable click hotkeys |
+| **Yes Dialog** | Ctrl+P | Click Yes on confirmation dialogs |
+| **Mystic Forge** | Ctrl+F | Click Mystic Forge combine button |
+| **Mystic Refill** | Ctrl+R | Click Mystic Forge refill button |
+| **Mystic Forge Combo** | Ctrl+A | Forge then Refill (100ms delay) |
+| **Generic 1-5** | Ctrl+1/2 | User-assignable click hotkeys |
 
 | Capture Position | Default Key | Description |
 | ---------------- | ----------- | ----------- |
 | **Capture Deposit** | Ctrl+Shift+D | Save deposit button location |
-| **Capture Sort** | Ctrl+Shift+S | Save sort button location |
+| **Capture Sort** | Ctrl+Shift+C | Save sort button location |
 | **Capture Chest** | Ctrl+Shift+B | Save bouncy chest location |
 | **Capture Exit** | Ctrl+Shift+E | Save exit instance button location |
+| **Capture Yes Dialog** | Ctrl+Shift+P | Save Yes button location |
+| **Capture Mystic Forge** | Ctrl+Shift+F | Save Mystic Forge button location |
+| **Capture Mystic Refill** | Ctrl+Shift+R | Save Mystic Refill button location |
 | **Capture Generic 1-5** | Ctrl+Shift+1-5 | Save generic hotkey locations |
 
 All keybinds can be customized in Nexus Options (Ctrl+O → Keybinds).
@@ -68,6 +75,9 @@ This means you only need to capture positions **once per resolution** - switch b
 | Bouncy Chest Hotkey | ✅ Working |
 | Deposit + Sort Combo | ✅ Working |
 | Exit Instance Hotkey | ✅ Working |
+| Yes Dialog Hotkey | ✅ Working |
+| Mystic Forge Hotkeys | ✅ Working |
+| Mystic Forge Combo | ✅ Working |
 | Generic Hotkeys (5 slots) | ✅ Working |
 | Position Capture | ✅ Working |
 | Config Persistence | ✅ Working |

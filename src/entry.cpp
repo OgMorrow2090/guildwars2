@@ -54,7 +54,7 @@ extern "C" __declspec(dllexport) AddonDefinition_t* GetAddonDef()
     // Addon metadata
     AddonDef.Name = "Inventory Hotkeys";
     AddonDef.Version.Major = 1;
-    AddonDef.Version.Minor = 2;
+    AddonDef.Version.Minor = 3;
     AddonDef.Version.Build = 0;
     AddonDef.Version.Revision = 0;
     AddonDef.Author = "OgMorrow2090";
@@ -140,17 +140,41 @@ void AddonLoad(AddonAPI_t* aApi)
         "CTRL+E"
     );
     
+    APIDefs->InputBinds_RegisterWithString(
+        KB_YES_DIALOG, 
+        ProcessKeybind, 
+        "CTRL+P"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_MYSTIC_FORGE, 
+        ProcessKeybind, 
+        "CTRL+F"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_MYSTIC_REFILL, 
+        ProcessKeybind, 
+        "CTRL+R"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_MYSTIC_FORGE_COMBO, 
+        ProcessKeybind, 
+        "CTRL+A"
+    );
+    
     // === GENERIC HOTKEYS (unassigned by default) ===
     APIDefs->InputBinds_RegisterWithString(
         KB_GENERIC_1, 
         ProcessKeybind, 
-        "(null)"
+        "CTRL+1"
     );
     
     APIDefs->InputBinds_RegisterWithString(
         KB_GENERIC_2, 
         ProcessKeybind, 
-        "(null)"
+        "CTRL+2"
     );
     
     APIDefs->InputBinds_RegisterWithString(
@@ -226,6 +250,24 @@ void AddonLoad(AddonAPI_t* aApi)
         "CTRL+SHIFT+5"
     );
     
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_YES_DIALOG, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+P"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_MYSTIC_FORGE, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+F"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_MYSTIC_REFILL, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+R"
+    );
+    
     APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Addon loaded!");
     APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Actions: Alt+D (Deposit), Alt+C (Compact), Alt+B (Chest)");
     APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Capture: Ctrl+Shift+D/C/B to set positions");
@@ -244,6 +286,10 @@ void AddonUnload()
     APIDefs->InputBinds_Deregister(KB_OPEN_CHEST);
     APIDefs->InputBinds_Deregister(KB_DEPOSIT_AND_SORT);
     APIDefs->InputBinds_Deregister(KB_EXIT_INSTANCE);
+    APIDefs->InputBinds_Deregister(KB_YES_DIALOG);
+    APIDefs->InputBinds_Deregister(KB_MYSTIC_FORGE);
+    APIDefs->InputBinds_Deregister(KB_MYSTIC_REFILL);
+    APIDefs->InputBinds_Deregister(KB_MYSTIC_FORGE_COMBO);
     
     // Deregister generic keybinds
     APIDefs->InputBinds_Deregister(KB_GENERIC_1);
@@ -262,6 +308,9 @@ void AddonUnload()
     APIDefs->InputBinds_Deregister(KB_CAPTURE_GENERIC_3);
     APIDefs->InputBinds_Deregister(KB_CAPTURE_GENERIC_4);
     APIDefs->InputBinds_Deregister(KB_CAPTURE_GENERIC_5);
+    APIDefs->InputBinds_Deregister(KB_CAPTURE_YES_DIALOG);
+    APIDefs->InputBinds_Deregister(KB_CAPTURE_MYSTIC_FORGE);
+    APIDefs->InputBinds_Deregister(KB_CAPTURE_MYSTIC_REFILL);
     
     APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Addon unloaded.");
     

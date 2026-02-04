@@ -51,6 +51,22 @@ void ProcessKeybind(const char* aIdentifier, bool aIsRelease)
     {
         SimulateExitInstanceClick();
     }
+    else if (strcmp(aIdentifier, KB_YES_DIALOG) == 0)
+    {
+        SimulateYesDialogClick();
+    }
+    else if (strcmp(aIdentifier, KB_MYSTIC_FORGE) == 0)
+    {
+        SimulateMysticForgeClick();
+    }
+    else if (strcmp(aIdentifier, KB_MYSTIC_REFILL) == 0)
+    {
+        SimulateMysticRefillClick();
+    }
+    else if (strcmp(aIdentifier, KB_MYSTIC_FORGE_COMBO) == 0)
+    {
+        SimulateMysticForgeCombo();
+    }
     // === GENERIC HOTKEYS ===
     else if (strcmp(aIdentifier, KB_GENERIC_1) == 0)
     {
@@ -108,5 +124,17 @@ void ProcessKeybind(const char* aIdentifier, bool aIsRelease)
     else if (strcmp(aIdentifier, KB_CAPTURE_GENERIC_5) == 0)
     {
         CaptureGenericPosition(5);
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_YES_DIALOG) == 0)
+    {
+        CaptureYesDialogPosition();
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_MYSTIC_FORGE) == 0)
+    {
+        CaptureMysticForgePosition();
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_MYSTIC_REFILL) == 0)
+    {
+        CaptureMysticRefillPosition();
     }
 }

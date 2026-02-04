@@ -37,6 +37,12 @@ int g_Generic4X = 0;
 int g_Generic4Y = 0;
 int g_Generic5X = 0;
 int g_Generic5Y = 0;
+int g_YesDialogX = 0;
+int g_YesDialogY = 0;
+int g_MysticForgeX = 0;
+int g_MysticForgeY = 0;
+int g_MysticRefillX = 0;
+int g_MysticRefillY = 0;
 
 // Resolution tracking
 static int g_CurrentResWidth = 0;
@@ -166,6 +172,18 @@ void LoadButtonPositions()
             g_Generic5X = std::stoi(line.substr(10));
         else if (line.find("Generic5Y=") == 0)
             g_Generic5Y = std::stoi(line.substr(10));
+        else if (line.find("YesDialogX=") == 0)
+            g_YesDialogX = std::stoi(line.substr(11));
+        else if (line.find("YesDialogY=") == 0)
+            g_YesDialogY = std::stoi(line.substr(11));
+        else if (line.find("MysticForgeX=") == 0)
+            g_MysticForgeX = std::stoi(line.substr(13));
+        else if (line.find("MysticForgeY=") == 0)
+            g_MysticForgeY = std::stoi(line.substr(13));
+        else if (line.find("MysticRefillX=") == 0)
+            g_MysticRefillX = std::stoi(line.substr(14));
+        else if (line.find("MysticRefillY=") == 0)
+            g_MysticRefillY = std::stoi(line.substr(14));
     }
     
     file.close();
@@ -216,6 +234,12 @@ void SaveButtonPositions()
     file << "Generic4Y=" << g_Generic4Y << "\n";
     file << "Generic5X=" << g_Generic5X << "\n";
     file << "Generic5Y=" << g_Generic5Y << "\n";
+    file << "YesDialogX=" << g_YesDialogX << "\n";
+    file << "YesDialogY=" << g_YesDialogY << "\n";
+    file << "MysticForgeX=" << g_MysticForgeX << "\n";
+    file << "MysticForgeY=" << g_MysticForgeY << "\n";
+    file << "MysticRefillX=" << g_MysticRefillX << "\n";
+    file << "MysticRefillY=" << g_MysticRefillY << "\n";
     
     file.close();
     
@@ -261,6 +285,12 @@ void CheckResolutionChange()
         g_Generic4Y = 0;
         g_Generic5X = 0;
         g_Generic5Y = 0;
+        g_YesDialogX = 0;
+        g_YesDialogY = 0;
+        g_MysticForgeX = 0;
+        g_MysticForgeY = 0;
+        g_MysticRefillX = 0;
+        g_MysticRefillY = 0;
         
         // Load config for new resolution (if exists)
         g_CurrentResWidth = width;
@@ -310,6 +340,18 @@ void CheckResolutionChange()
                     g_Generic5X = std::stoi(line.substr(10));
                 else if (line.find("Generic5Y=") == 0)
                     g_Generic5Y = std::stoi(line.substr(10));
+                else if (line.find("YesDialogX=") == 0)
+                    g_YesDialogX = std::stoi(line.substr(11));
+                else if (line.find("YesDialogY=") == 0)
+                    g_YesDialogY = std::stoi(line.substr(11));
+                else if (line.find("MysticForgeX=") == 0)
+                    g_MysticForgeX = std::stoi(line.substr(13));
+                else if (line.find("MysticForgeY=") == 0)
+                    g_MysticForgeY = std::stoi(line.substr(13));
+                else if (line.find("MysticRefillX=") == 0)
+                    g_MysticRefillX = std::stoi(line.substr(14));
+                else if (line.find("MysticRefillY=") == 0)
+                    g_MysticRefillY = std::stoi(line.substr(14));
             }
             file.close();
             

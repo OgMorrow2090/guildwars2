@@ -56,6 +56,12 @@ Development plans for Guild Wars 2 Addons.
 
 ### Phase 3: Advanced Features (Future)
 
+- [x] **Mystic Forge Hotkeys** (v1.3.0)
+  - [x] Mystic Forge combine button hotkey
+  - [x] Mystic Forge refill button hotkey
+  - [x] Mystic Forge combo (Forge + Refill)
+  - [x] Yes Dialog confirmation hotkey
+
 - [ ] **Inventory State Detection**
   - [ ] Detect if inventory is open
   - [ ] Show warning if inventory closed

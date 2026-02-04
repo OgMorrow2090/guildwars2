@@ -185,6 +185,65 @@ void SimulateGenericClick(int slot)
     SimulateClickAt(x, y);
 }
 
+void SimulateYesDialogClick()
+{
+    if (g_YesDialogX == 0 && g_YesDialogY == 0)
+    {
+        APIDefs->GUI_SendAlert("Yes Dialog position not set! Capture first");
+        return;
+    }
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Clicking Yes Dialog");
+    SimulateClickAt(g_YesDialogX, g_YesDialogY);
+}
+
+void SimulateMysticForgeClick()
+{
+    if (g_MysticForgeX == 0 && g_MysticForgeY == 0)
+    {
+        APIDefs->GUI_SendAlert("Mystic Forge position not set! Capture first");
+        return;
+    }
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Clicking Mystic Forge");
+    SimulateClickAt(g_MysticForgeX, g_MysticForgeY);
+}
+
+void SimulateMysticRefillClick()
+{
+    if (g_MysticRefillX == 0 && g_MysticRefillY == 0)
+    {
+        APIDefs->GUI_SendAlert("Mystic Refill position not set! Capture first");
+        return;
+    }
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Clicking Mystic Refill");
+    SimulateClickAt(g_MysticRefillX, g_MysticRefillY);
+}
+
+void SimulateMysticForgeCombo()
+{
+    // Check both positions are set
+    if (g_MysticForgeX == 0 && g_MysticForgeY == 0)
+    {
+        APIDefs->GUI_SendAlert("Mystic Forge position not set! Capture first");
+        return;
+    }
+    if (g_MysticRefillX == 0 && g_MysticRefillY == 0)
+    {
+        APIDefs->GUI_SendAlert("Mystic Refill position not set! Capture first");
+        return;
+    }
+    
+    // Click Forge first
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Mystic Forge Combo: Forge");
+    SimulateClickAt(g_MysticForgeX, g_MysticForgeY);
+    
+    // Wait 100ms (same as Deposit+Sort combo)
+    Sleep(100);
+    
+    // Click Refill
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Mystic Forge Combo: Refill");
+    SimulateClickAt(g_MysticRefillX, g_MysticRefillY);
+}
+
 // =============================================================================
 // Position Capture Functions
 // =============================================================================
@@ -252,4 +311,19 @@ void CaptureGenericPosition(int slot)
         case 5: CapturePosition(g_Generic5X, g_Generic5Y, slotNames[5]); break;
         default: break;
     }
+}
+
+void CaptureYesDialogPosition()
+{
+    CapturePosition(g_YesDialogX, g_YesDialogY, "YES DIALOG");
+}
+
+void CaptureMysticForgePosition()
+{
+    CapturePosition(g_MysticForgeX, g_MysticForgeY, "MYSTIC FORGE");
+}
+
+void CaptureMysticRefillPosition()
+{
+    CapturePosition(g_MysticRefillX, g_MysticRefillY, "MYSTIC REFILL");
 }

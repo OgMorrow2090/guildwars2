@@ -134,6 +134,43 @@ void AddonLoad(AddonAPI_t* aApi)
         "CTRL+Q"
     );
     
+    APIDefs->InputBinds_RegisterWithString(
+        KB_EXIT_INSTANCE, 
+        ProcessKeybind, 
+        "CTRL+E"
+    );
+    
+    // === GENERIC HOTKEYS (unassigned by default) ===
+    APIDefs->InputBinds_RegisterWithString(
+        KB_GENERIC_1, 
+        ProcessKeybind, 
+        "(null)"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_GENERIC_2, 
+        ProcessKeybind, 
+        "(null)"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_GENERIC_3, 
+        ProcessKeybind, 
+        "(null)"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_GENERIC_4, 
+        ProcessKeybind, 
+        "(null)"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_GENERIC_5, 
+        ProcessKeybind, 
+        "(null)"
+    );
+    
     // === CAPTURE KEYBINDS ===
     APIDefs->InputBinds_RegisterWithString(
         KB_CAPTURE_DEPOSIT, 
@@ -153,6 +190,42 @@ void AddonLoad(AddonAPI_t* aApi)
         "CTRL+SHIFT+B"
     );
     
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_EXIT_INSTANCE, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+E"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_GENERIC_1, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+1"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_GENERIC_2, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+2"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_GENERIC_3, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+3"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_GENERIC_4, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+4"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_GENERIC_5, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+5"
+    );
+    
     APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Addon loaded!");
     APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Actions: Alt+D (Deposit), Alt+C (Compact), Alt+B (Chest)");
     APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Capture: Ctrl+Shift+D/C/B to set positions");
@@ -165,14 +238,30 @@ void AddonLoad(AddonAPI_t* aApi)
  */
 void AddonUnload()
 {
-    // Deregister keybinds
+    // Deregister action keybinds
     APIDefs->InputBinds_Deregister(KB_DEPOSIT_MATERIALS);
     APIDefs->InputBinds_Deregister(KB_SORT_INVENTORY);
     APIDefs->InputBinds_Deregister(KB_OPEN_CHEST);
     APIDefs->InputBinds_Deregister(KB_DEPOSIT_AND_SORT);
+    APIDefs->InputBinds_Deregister(KB_EXIT_INSTANCE);
+    
+    // Deregister generic keybinds
+    APIDefs->InputBinds_Deregister(KB_GENERIC_1);
+    APIDefs->InputBinds_Deregister(KB_GENERIC_2);
+    APIDefs->InputBinds_Deregister(KB_GENERIC_3);
+    APIDefs->InputBinds_Deregister(KB_GENERIC_4);
+    APIDefs->InputBinds_Deregister(KB_GENERIC_5);
+    
+    // Deregister capture keybinds
     APIDefs->InputBinds_Deregister(KB_CAPTURE_DEPOSIT);
     APIDefs->InputBinds_Deregister(KB_CAPTURE_SORT);
     APIDefs->InputBinds_Deregister(KB_CAPTURE_CHEST);
+    APIDefs->InputBinds_Deregister(KB_CAPTURE_EXIT_INSTANCE);
+    APIDefs->InputBinds_Deregister(KB_CAPTURE_GENERIC_1);
+    APIDefs->InputBinds_Deregister(KB_CAPTURE_GENERIC_2);
+    APIDefs->InputBinds_Deregister(KB_CAPTURE_GENERIC_3);
+    APIDefs->InputBinds_Deregister(KB_CAPTURE_GENERIC_4);
+    APIDefs->InputBinds_Deregister(KB_CAPTURE_GENERIC_5);
     
     APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Addon unloaded.");
     

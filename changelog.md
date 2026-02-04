@@ -5,6 +5,36 @@ All notable changes to Guild Wars 2 Addons will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-02-04
+
+### Added
+
+- **Exit Instance Hotkey** (Ctrl+E) - Click the exit instance button
+- **5 Generic Hotkeys** - User-assignable click hotkeys for any UI element
+  - Generic 1-5 with capture keys Ctrl+Shift+1-5
+  - Unassigned by default - configure in Nexus Options
+- **Capture Exit Instance** (Ctrl+Shift+E) - Save exit instance button location
+
+### Technical
+
+- Added 12 new position variables for exit instance and generic hotkeys
+- All positions saved per-resolution in config files
+
+## [1.1.0] - 2026-02-04
+
+### Added
+
+- **Per-Resolution Config Files** - Positions now save to resolution-specific files
+  - e.g., `inventory-hotkeys-1920x1080.cfg`, `inventory-hotkeys-2560x1440.cfg`
+- **Auto Resolution Detection** - Detects current game window resolution on startup
+- **Resolution Change Detection** - Automatically switches config when resolution changes
+- **Multi-Device Support** - Switch between laptop and desktop without reconfiguring
+
+### Changed
+
+- Config files now include resolution in filename
+- Alert messages show current resolution when loading/saving
+
 ## [1.0.0] - 2026-02-03
 
 ### Added
@@ -43,6 +73,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Date       | Highlights                                      |
 | ------- | ---------- | ----------------------------------------------- |
+| 1.2.0   | 2026-02-04 | Exit instance hotkey, 5 generic hotkeys         |
+| 1.1.0   | 2026-02-04 | Per-resolution configs, multi-device support    |
 | 1.0.0   | 2026-02-03 | Full release with all core features             |
 | 0.1.0   | 2026-01-01 | Initial structure and research                  |
 

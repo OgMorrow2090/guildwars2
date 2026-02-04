@@ -194,6 +194,18 @@ unsigned uiSize = ml->Identity.UISize;
 
 ## 📋 CODING STANDARDS
 
+### **Deployment Path (Steam)**
+
+```text
+C:\Program Files (x86)\Steam\steamapps\common\Guild Wars 2\addons\inventory-hotkeys.dll
+```
+
+**Deploy Command:**
+
+```powershell
+Copy-Item "bin\Release\inventory-hotkeys.dll" "C:\Program Files (x86)\Steam\steamapps\common\Guild Wars 2\addons\" -Force
+```
+
 ### **Naming Conventions**
 
 | Type | Convention | Example |

@@ -145,6 +145,46 @@ void SimulateDepositAndSort()
     }
 }
 
+void SimulateExitInstanceClick()
+{
+    if (g_ExitInstanceX == 0 && g_ExitInstanceY == 0)
+    {
+        APIDefs->GUI_SendAlert("Exit Instance position not set! Use Ctrl+Shift+E to capture");
+        return;
+    }
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Clicking Exit Instance");
+    SimulateClickAt(g_ExitInstanceX, g_ExitInstanceY);
+}
+
+void SimulateGenericClick(int slot)
+{
+    int x = 0, y = 0;
+    const char* slotName = "Generic";
+    
+    switch (slot)
+    {
+        case 1: x = g_Generic1X; y = g_Generic1Y; slotName = "Generic 1"; break;
+        case 2: x = g_Generic2X; y = g_Generic2Y; slotName = "Generic 2"; break;
+        case 3: x = g_Generic3X; y = g_Generic3Y; slotName = "Generic 3"; break;
+        case 4: x = g_Generic4X; y = g_Generic4Y; slotName = "Generic 4"; break;
+        case 5: x = g_Generic5X; y = g_Generic5Y; slotName = "Generic 5"; break;
+        default: return;
+    }
+    
+    if (x == 0 && y == 0)
+    {
+        char buffer[128];
+        sprintf_s(buffer, "%s position not set! Capture with Ctrl+Shift+%d", slotName, slot);
+        APIDefs->GUI_SendAlert(buffer);
+        return;
+    }
+    
+    char buffer[64];
+    sprintf_s(buffer, "Clicking %s", slotName);
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", buffer);
+    SimulateClickAt(x, y);
+}
+
 // =============================================================================
 // Position Capture Functions
 // =============================================================================
@@ -192,4 +232,24 @@ void CaptureSortPosition()
 void CaptureChestPosition()
 {
     CapturePosition(g_ChestX, g_ChestY, "BOUNCY CHEST");
+}
+
+void CaptureExitInstancePosition()
+{
+    CapturePosition(g_ExitInstanceX, g_ExitInstanceY, "EXIT INSTANCE");
+}
+
+void CaptureGenericPosition(int slot)
+{
+    const char* slotNames[] = { "", "GENERIC 1", "GENERIC 2", "GENERIC 3", "GENERIC 4", "GENERIC 5" };
+    
+    switch (slot)
+    {
+        case 1: CapturePosition(g_Generic1X, g_Generic1Y, slotNames[1]); break;
+        case 2: CapturePosition(g_Generic2X, g_Generic2Y, slotNames[2]); break;
+        case 3: CapturePosition(g_Generic3X, g_Generic3Y, slotNames[3]); break;
+        case 4: CapturePosition(g_Generic4X, g_Generic4Y, slotNames[4]); break;
+        case 5: CapturePosition(g_Generic5X, g_Generic5Y, slotNames[5]); break;
+        default: break;
+    }
 }

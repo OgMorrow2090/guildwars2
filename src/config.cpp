@@ -2,7 +2,8 @@
  * config.cpp
  * 
  * Configuration file handling for button positions.
- * Saves/loads positions to a simple text config file.
+ * Saves/loads positions to resolution-specific config files.
+ * e.g., inventory-hotkeys-1920x1080.cfg, inventory-hotkeys-2560x1440.cfg
  * 
  * Author: OgMorrow2090
  * Repository: https://github.com/OgMorrow2090/guildwars2
@@ -24,9 +25,64 @@ int g_SortX = 0;
 int g_SortY = 0;
 int g_ChestX = 0;
 int g_ChestY = 0;
+int g_ExitInstanceX = 0;
+int g_ExitInstanceY = 0;
+int g_Generic1X = 0;
+int g_Generic1Y = 0;
+int g_Generic2X = 0;
+int g_Generic2Y = 0;
+int g_Generic3X = 0;
+int g_Generic3Y = 0;
+int g_Generic4X = 0;
+int g_Generic4Y = 0;
+int g_Generic5X = 0;
+int g_Generic5Y = 0;
 
-// Config file path
-static std::string g_ConfigPath;
+// Resolution tracking
+static int g_CurrentResWidth = 0;
+static int g_CurrentResHeight = 0;
+
+// Config directory path (base path without filename)
+static std::string g_ConfigDir;
+
+// =============================================================================
+// Resolution Detection
+// =============================================================================
+
+void GetCurrentResolution(int& width, int& height)
+{
+    // Try to get resolution from game window first
+    if (GameWindow != NULL)
+    {
+        RECT rect;
+        if (GetClientRect(GameWindow, &rect))
+        {
+            width = rect.right - rect.left;
+            height = rect.bottom - rect.top;
+            return;
+        }
+    }
+    
+    // Fallback to primary monitor resolution
+    width = GetSystemMetrics(SM_CXSCREEN);
+    height = GetSystemMetrics(SM_CYSCREEN);
+}
+
+std::string GetConfigPathForResolution(int width, int height)
+{
+    char buffer[512];
+    sprintf_s(buffer, "%s\\inventory-hotkeys-%dx%d.cfg", g_ConfigDir.c_str(), width, height);
+    return std::string(buffer);
+}
+
+std::string GetCurrentConfigPath()
+{
+    int width, height;
+    GetCurrentResolution(width, height);
+    g_CurrentResWidth = width;
+    g_CurrentResHeight = height;
+    return GetConfigPathForResolution(width, height);
+}
 
 // =============================================================================
 // Config File Functions
@@ -36,25 +92,38 @@ void SetConfigPath(const char* addonPath)
 {
     if (addonPath != nullptr)
     {
-        g_ConfigPath = std::string(addonPath) + "\\inventory-hotkeys.cfg";
+        g_ConfigDir = std::string(addonPath);
         
         // Create directory if it doesn't exist
         CreateDirectoryA(addonPath, NULL);
+        
+        // Log current resolution
+        int width, height;
+        GetCurrentResolution(width, height);
+        char buffer[128];
+        sprintf_s(buffer, "Detected resolution: %dx%d", width, height);
+        APIDefs->Log(LOGL_INFO, "InventoryHotkeys", buffer);
     }
 }
 
 void LoadButtonPositions()
 {
-    if (g_ConfigPath.empty())
+    if (g_ConfigDir.empty())
     {
         APIDefs->Log(LOGL_WARNING, "InventoryHotkeys", "Config path not set");
         return;
     }
     
-    std::ifstream file(g_ConfigPath);
+    std::string configPath = GetCurrentConfigPath();
+    
+    std::ifstream file(configPath);
     if (!file.is_open())
     {
-        APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "No config file - use Ctrl+Shift+D/C/B to capture positions");
+        char buffer[256];
+        sprintf_s(buffer, "No config for %dx%d - use Ctrl+Shift+D/S/B to capture positions", 
+                  g_CurrentResWidth, g_CurrentResHeight);
+        APIDefs->Log(LOGL_INFO, "InventoryHotkeys", buffer);
+        APIDefs->GUI_SendAlert(buffer);
         return;
     }
     
@@ -73,26 +142,53 @@ void LoadButtonPositions()
             g_ChestX = std::stoi(line.substr(7));
         else if (line.find("ChestY=") == 0)
             g_ChestY = std::stoi(line.substr(7));
+        else if (line.find("ExitInstanceX=") == 0)
+            g_ExitInstanceX = std::stoi(line.substr(14));
+        else if (line.find("ExitInstanceY=") == 0)
+            g_ExitInstanceY = std::stoi(line.substr(14));
+        else if (line.find("Generic1X=") == 0)
+            g_Generic1X = std::stoi(line.substr(10));
+        else if (line.find("Generic1Y=") == 0)
+            g_Generic1Y = std::stoi(line.substr(10));
+        else if (line.find("Generic2X=") == 0)
+            g_Generic2X = std::stoi(line.substr(10));
+        else if (line.find("Generic2Y=") == 0)
+            g_Generic2Y = std::stoi(line.substr(10));
+        else if (line.find("Generic3X=") == 0)
+            g_Generic3X = std::stoi(line.substr(10));
+        else if (line.find("Generic3Y=") == 0)
+            g_Generic3Y = std::stoi(line.substr(10));
+        else if (line.find("Generic4X=") == 0)
+            g_Generic4X = std::stoi(line.substr(10));
+        else if (line.find("Generic4Y=") == 0)
+            g_Generic4Y = std::stoi(line.substr(10));
+        else if (line.find("Generic5X=") == 0)
+            g_Generic5X = std::stoi(line.substr(10));
+        else if (line.find("Generic5Y=") == 0)
+            g_Generic5Y = std::stoi(line.substr(10));
     }
     
     file.close();
     
     char buffer[256];
-    sprintf_s(buffer, "Loaded: Deposit(%d,%d) Sort(%d,%d) Chest(%d,%d)", 
+    sprintf_s(buffer, "Loaded [%dx%d]: Deposit(%d,%d) Sort(%d,%d) Chest(%d,%d)", 
+              g_CurrentResWidth, g_CurrentResHeight,
               g_DepositX, g_DepositY, g_SortX, g_SortY, g_ChestX, g_ChestY);
     APIDefs->Log(LOGL_INFO, "InventoryHotkeys", buffer);
 }
 
 void SaveButtonPositions()
 {
-    if (g_ConfigPath.empty())
+    if (g_ConfigDir.empty())
     {
         APIDefs->Log(LOGL_WARNING, "InventoryHotkeys", "Config path not set");
         APIDefs->GUI_SendAlert("Error: Config path not set!");
         return;
     }
     
-    std::ofstream file(g_ConfigPath);
+    std::string configPath = GetCurrentConfigPath();
+    
+    std::ofstream file(configPath);
     if (!file.is_open())
     {
         APIDefs->Log(LOGL_WARNING, "InventoryHotkeys", "Failed to save config file");
@@ -100,14 +196,131 @@ void SaveButtonPositions()
         return;
     }
     
+    // Write resolution header as comment
+    file << "# Resolution: " << g_CurrentResWidth << "x" << g_CurrentResHeight << "\n";
     file << "DepositX=" << g_DepositX << "\n";
     file << "DepositY=" << g_DepositY << "\n";
     file << "SortX=" << g_SortX << "\n";
     file << "SortY=" << g_SortY << "\n";
     file << "ChestX=" << g_ChestX << "\n";
     file << "ChestY=" << g_ChestY << "\n";
+    file << "ExitInstanceX=" << g_ExitInstanceX << "\n";
+    file << "ExitInstanceY=" << g_ExitInstanceY << "\n";
+    file << "Generic1X=" << g_Generic1X << "\n";
+    file << "Generic1Y=" << g_Generic1Y << "\n";
+    file << "Generic2X=" << g_Generic2X << "\n";
+    file << "Generic2Y=" << g_Generic2Y << "\n";
+    file << "Generic3X=" << g_Generic3X << "\n";
+    file << "Generic3Y=" << g_Generic3Y << "\n";
+    file << "Generic4X=" << g_Generic4X << "\n";
+    file << "Generic4Y=" << g_Generic4Y << "\n";
+    file << "Generic5X=" << g_Generic5X << "\n";
+    file << "Generic5Y=" << g_Generic5Y << "\n";
     
     file.close();
     
-    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Positions saved to config file");
+    char buffer[256];
+    sprintf_s(buffer, "Saved config for %dx%d", g_CurrentResWidth, g_CurrentResHeight);
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", buffer);
+    APIDefs->GUI_SendAlert(buffer);
+}
+
+// =============================================================================
+// Resolution Change Detection
+// =============================================================================
+
+void CheckResolutionChange()
+{
+    int width, height;
+    GetCurrentResolution(width, height);
+    
+    // Check if resolution changed
+    if (width != g_CurrentResWidth || height != g_CurrentResHeight)
+    {
+        char buffer[256];
+        sprintf_s(buffer, "Resolution changed: %dx%d -> %dx%d", 
+                  g_CurrentResWidth, g_CurrentResHeight, width, height);
+        APIDefs->Log(LOGL_INFO, "InventoryHotkeys", buffer);
+        
+        // Reset all positions for new resolution
+        g_DepositX = 0;
+        g_DepositY = 0;
+        g_SortX = 0;
+        g_SortY = 0;
+        g_ChestX = 0;
+        g_ChestY = 0;
+        g_ExitInstanceX = 0;
+        g_ExitInstanceY = 0;
+        g_Generic1X = 0;
+        g_Generic1Y = 0;
+        g_Generic2X = 0;
+        g_Generic2Y = 0;
+        g_Generic3X = 0;
+        g_Generic3Y = 0;
+        g_Generic4X = 0;
+        g_Generic4Y = 0;
+        g_Generic5X = 0;
+        g_Generic5Y = 0;
+        
+        // Load config for new resolution (if exists)
+        g_CurrentResWidth = width;
+        g_CurrentResHeight = height;
+        
+        std::string configPath = GetConfigPathForResolution(width, height);
+        std::ifstream file(configPath);
+        
+        if (file.is_open())
+        {
+            std::string line;
+            while (std::getline(file, line))
+            {
+                if (line.find("DepositX=") == 0)
+                    g_DepositX = std::stoi(line.substr(9));
+                else if (line.find("DepositY=") == 0)
+                    g_DepositY = std::stoi(line.substr(9));
+                else if (line.find("SortX=") == 0)
+                    g_SortX = std::stoi(line.substr(6));
+                else if (line.find("SortY=") == 0)
+                    g_SortY = std::stoi(line.substr(6));
+                else if (line.find("ChestX=") == 0)
+                    g_ChestX = std::stoi(line.substr(7));
+                else if (line.find("ChestY=") == 0)
+                    g_ChestY = std::stoi(line.substr(7));
+                else if (line.find("ExitInstanceX=") == 0)
+                    g_ExitInstanceX = std::stoi(line.substr(14));
+                else if (line.find("ExitInstanceY=") == 0)
+                    g_ExitInstanceY = std::stoi(line.substr(14));
+                else if (line.find("Generic1X=") == 0)
+                    g_Generic1X = std::stoi(line.substr(10));
+                else if (line.find("Generic1Y=") == 0)
+                    g_Generic1Y = std::stoi(line.substr(10));
+                else if (line.find("Generic2X=") == 0)
+                    g_Generic2X = std::stoi(line.substr(10));
+                else if (line.find("Generic2Y=") == 0)
+                    g_Generic2Y = std::stoi(line.substr(10));
+                else if (line.find("Generic3X=") == 0)
+                    g_Generic3X = std::stoi(line.substr(10));
+                else if (line.find("Generic3Y=") == 0)
+                    g_Generic3Y = std::stoi(line.substr(10));
+                else if (line.find("Generic4X=") == 0)
+                    g_Generic4X = std::stoi(line.substr(10));
+                else if (line.find("Generic4Y=") == 0)
+                    g_Generic4Y = std::stoi(line.substr(10));
+                else if (line.find("Generic5X=") == 0)
+                    g_Generic5X = std::stoi(line.substr(10));
+                else if (line.find("Generic5Y=") == 0)
+                    g_Generic5Y = std::stoi(line.substr(10));
+            }
+            file.close();
+            
+            sprintf_s(buffer, "Loaded config for %dx%d", width, height);
+            APIDefs->Log(LOGL_INFO, "InventoryHotkeys", buffer);
+            APIDefs->GUI_SendAlert(buffer);
+        }
+        else
+        {
+            sprintf_s(buffer, "New resolution %dx%d - capture positions to configure", width, height);
+            APIDefs->GUI_SendAlert(buffer);
+        }
+    }
 }

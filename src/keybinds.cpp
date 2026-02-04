@@ -27,6 +27,9 @@ void ProcessKeybind(const char* aIdentifier, bool aIsRelease)
         return;
     }
     
+    // Check if resolution changed and load appropriate config
+    CheckResolutionChange();
+    
     // === ACTION KEYBINDS ===
     if (strcmp(aIdentifier, KB_DEPOSIT_MATERIALS) == 0)
     {
@@ -44,6 +47,31 @@ void ProcessKeybind(const char* aIdentifier, bool aIsRelease)
     {
         SimulateDepositAndSort();
     }
+    else if (strcmp(aIdentifier, KB_EXIT_INSTANCE) == 0)
+    {
+        SimulateExitInstanceClick();
+    }
+    // === GENERIC HOTKEYS ===
+    else if (strcmp(aIdentifier, KB_GENERIC_1) == 0)
+    {
+        SimulateGenericClick(1);
+    }
+    else if (strcmp(aIdentifier, KB_GENERIC_2) == 0)
+    {
+        SimulateGenericClick(2);
+    }
+    else if (strcmp(aIdentifier, KB_GENERIC_3) == 0)
+    {
+        SimulateGenericClick(3);
+    }
+    else if (strcmp(aIdentifier, KB_GENERIC_4) == 0)
+    {
+        SimulateGenericClick(4);
+    }
+    else if (strcmp(aIdentifier, KB_GENERIC_5) == 0)
+    {
+        SimulateGenericClick(5);
+    }
     // === CAPTURE KEYBINDS ===
     else if (strcmp(aIdentifier, KB_CAPTURE_DEPOSIT) == 0)
     {
@@ -56,5 +84,29 @@ void ProcessKeybind(const char* aIdentifier, bool aIsRelease)
     else if (strcmp(aIdentifier, KB_CAPTURE_CHEST) == 0)
     {
         CaptureChestPosition();
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_EXIT_INSTANCE) == 0)
+    {
+        CaptureExitInstancePosition();
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_GENERIC_1) == 0)
+    {
+        CaptureGenericPosition(1);
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_GENERIC_2) == 0)
+    {
+        CaptureGenericPosition(2);
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_GENERIC_3) == 0)
+    {
+        CaptureGenericPosition(3);
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_GENERIC_4) == 0)
+    {
+        CaptureGenericPosition(4);
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_GENERIC_5) == 0)
+    {
+        CaptureGenericPosition(5);
     }
 }

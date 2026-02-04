@@ -20,12 +20,16 @@ Adds configurable hotkeys for inventory management actions that normally require
 | **Compact/Sort** | Ctrl+S | Click sort/compact button |
 | **Open Chest** | Ctrl+B | Right-click bouncy chest |
 | **Deposit + Sort** | Ctrl+Q | Combo: deposit then sort |
+| **Exit Instance** | Ctrl+E | Click exit instance button |
+| **Generic 1-5** | Unassigned | User-assignable click hotkeys |
 
 | Capture Position | Default Key | Description |
 | ---------------- | ----------- | ----------- |
 | **Capture Deposit** | Ctrl+Shift+D | Save deposit button location |
 | **Capture Sort** | Ctrl+Shift+S | Save sort button location |
 | **Capture Chest** | Ctrl+Shift+B | Save bouncy chest location |
+| **Capture Exit** | Ctrl+Shift+E | Save exit instance button location |
+| **Capture Generic 1-5** | Ctrl+Shift+1-5 | Save generic hotkey locations |
 
 All keybinds can be customized in Nexus Options (Ctrl+O → Keybinds).
 
@@ -39,11 +43,21 @@ All keybinds can be customized in Nexus Options (Ctrl+O → Keybinds).
 
 ### Config File
 
-Positions are saved to:
+Positions are saved per-resolution to separate config files:
 
 ```text
-Guild Wars 2/addons/InventoryHotkeys/inventory-hotkeys.cfg
+Guild Wars 2/addons/InventoryHotkeys/inventory-hotkeys-1920x1080.cfg
+Guild Wars 2/addons/InventoryHotkeys/inventory-hotkeys-2560x1440.cfg
+Guild Wars 2/addons/InventoryHotkeys/inventory-hotkeys-3840x2160.cfg
 ```
+
+When you switch between devices or change resolution, the addon automatically:
+
+1. Detects the new resolution
+2. Loads the config for that resolution (if exists)
+3. Prompts you to capture positions if no config exists for the new resolution
+
+This means you only need to capture positions **once per resolution** - switch between your laptop (1080p) and desktop (1440p) seamlessly!
 
 ## 📋 Status
 
@@ -53,8 +67,12 @@ Guild Wars 2/addons/InventoryHotkeys/inventory-hotkeys.cfg
 | Sort Inventory Hotkey | ✅ Working |
 | Bouncy Chest Hotkey | ✅ Working |
 | Deposit + Sort Combo | ✅ Working |
+| Exit Instance Hotkey | ✅ Working |
+| Generic Hotkeys (5 slots) | ✅ Working |
 | Position Capture | ✅ Working |
 | Config Persistence | ✅ Working |
+| Per-Resolution Configs | ✅ Working |
+| Auto Resolution Detection | ✅ Working |
 | Nexus Keybind UI | ✅ Working |
 
 ## 🔧 Technical Stack
@@ -100,6 +118,12 @@ guildwars2/
 2. Download the addon `.dll` from releases
 3. Place in `Guild Wars 2/addons/` folder
 4. Launch game and configure hotkeys in Nexus options (Ctrl+O)
+
+**Steam Installation Path:**
+
+```text
+C:\Program Files (x86)\Steam\steamapps\common\Guild Wars 2\addons\inventory-hotkeys.dll
+```
 
 ### Development Setup
 

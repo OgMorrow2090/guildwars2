@@ -34,6 +34,12 @@ Development plans for Guild Wars 2 Addons.
 
 ### Phase 2: Polish (Future)
 
+- [x] **Per-Resolution Config Support**
+  - [x] Detect current screen resolution
+  - [x] Save configs with resolution in filename
+  - [x] Auto-load correct config on resolution change
+  - [x] Support switching between devices (laptop/desktop)
+
 - [ ] **UI Scaling Support**
   - [ ] Read MumbleLink UI size setting
   - [ ] Adjust button positions for different UI scales
@@ -76,6 +82,9 @@ Development plans for Guild Wars 2 Addons.
 
 ### February 2026
 
+- [x] v1.1.0 per-resolution config support
+- [x] Auto resolution detection
+- [x] Multi-device support (laptop/desktop switching)
 - [x] v1.0.0 release with full functionality
 - [x] Deposit Materials hotkey (Ctrl+D)
 - [x] Sort Inventory hotkey (Ctrl+S)

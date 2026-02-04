@@ -24,6 +24,8 @@ constexpr const char* KB_MYSTIC_REFILL = "MYSTIC_REFILL";
 constexpr const char* KB_MYSTIC_FORGE_COMBO = "MYSTIC_FORGE_COMBO";
 constexpr const char* KB_VENDOR = "VENDOR";
 constexpr const char* KB_SELL_JUNK = "SELL_JUNK";
+constexpr const char* KB_TRADING_POST = "TRADING_POST";
+constexpr const char* KB_TP_REMOVE = "TP_REMOVE";
 
 // Keybind identifiers - Generic (user-assignable)
 constexpr const char* KB_GENERIC_1 = "GENERIC_1";
@@ -47,6 +49,8 @@ constexpr const char* KB_CAPTURE_MYSTIC_FORGE = "CAPTURE_MYSTIC_FORGE";
 constexpr const char* KB_CAPTURE_MYSTIC_REFILL = "CAPTURE_MYSTIC_REFILL";
 constexpr const char* KB_CAPTURE_VENDOR = "CAPTURE_VENDOR";
 constexpr const char* KB_CAPTURE_SELL_JUNK = "CAPTURE_SELL_JUNK";
+constexpr const char* KB_CAPTURE_TRADING_POST = "CAPTURE_TRADING_POST";
+constexpr const char* KB_CAPTURE_TP_REMOVE = "CAPTURE_TP_REMOVE";
 
 // Keybind handler
 void ProcessKeybind(const char* aIdentifier, bool aIsRelease);
@@ -63,6 +67,8 @@ void SimulateMysticRefillClick();
 void SimulateMysticForgeCombo();
 void SimulateVendorClick();
 void SimulateSellJunkClick();
+void SimulateTradingPostClick();
+void SimulateTpRemoveClick();
 void SimulateGenericClick(int slot);
 void SimulateClickAt(int x, int y);
 void SimulateRightClickAt(int x, int y);
@@ -77,6 +83,8 @@ void CaptureMysticForgePosition();
 void CaptureMysticRefillPosition();
 void CaptureVendorPosition();
 void CaptureSellJunkPosition();
+void CaptureTradingPostPosition();
+void CaptureTpRemovePosition();
 void CaptureGenericPosition(int slot);
 
 // Config functions
@@ -114,3 +122,7 @@ extern int g_VendorX;
 extern int g_VendorY;
 extern int g_SellJunkX;
 extern int g_SellJunkY;
+extern int g_TradingPostX;
+extern int g_TradingPostY;
+extern int g_TpRemoveX;
+extern int g_TpRemoveY;

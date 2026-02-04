@@ -47,6 +47,10 @@ int g_VendorX = 0;
 int g_VendorY = 0;
 int g_SellJunkX = 0;
 int g_SellJunkY = 0;
+int g_TradingPostX = 0;
+int g_TradingPostY = 0;
+int g_TpRemoveX = 0;
+int g_TpRemoveY = 0;
 
 // Resolution tracking
 static int g_CurrentResWidth = 0;
@@ -196,6 +200,14 @@ void LoadButtonPositions()
             g_SellJunkX = std::stoi(line.substr(10));
         else if (line.find("SellJunkY=") == 0)
             g_SellJunkY = std::stoi(line.substr(10));
+        else if (line.find("TradingPostX=") == 0)
+            g_TradingPostX = std::stoi(line.substr(13));
+        else if (line.find("TradingPostY=") == 0)
+            g_TradingPostY = std::stoi(line.substr(13));
+        else if (line.find("TpRemoveX=") == 0)
+            g_TpRemoveX = std::stoi(line.substr(10));
+        else if (line.find("TpRemoveY=") == 0)
+            g_TpRemoveY = std::stoi(line.substr(10));
     }
     
     file.close();
@@ -256,6 +268,10 @@ void SaveButtonPositions()
     file << "VendorY=" << g_VendorY << "\n";
     file << "SellJunkX=" << g_SellJunkX << "\n";
     file << "SellJunkY=" << g_SellJunkY << "\n";
+    file << "TradingPostX=" << g_TradingPostX << "\n";
+    file << "TradingPostY=" << g_TradingPostY << "\n";
+    file << "TpRemoveX=" << g_TpRemoveX << "\n";
+    file << "TpRemoveY=" << g_TpRemoveY << "\n";
     
     file.close();
     
@@ -311,6 +327,10 @@ void CheckResolutionChange()
         g_VendorY = 0;
         g_SellJunkX = 0;
         g_SellJunkY = 0;
+        g_TradingPostX = 0;
+        g_TradingPostY = 0;
+        g_TpRemoveX = 0;
+        g_TpRemoveY = 0;
         
         // Load config for new resolution (if exists)
         g_CurrentResWidth = width;
@@ -380,6 +400,14 @@ void CheckResolutionChange()
                     g_SellJunkX = std::stoi(line.substr(10));
                 else if (line.find("SellJunkY=") == 0)
                     g_SellJunkY = std::stoi(line.substr(10));
+                else if (line.find("TradingPostX=") == 0)
+                    g_TradingPostX = std::stoi(line.substr(13));
+                else if (line.find("TradingPostY=") == 0)
+                    g_TradingPostY = std::stoi(line.substr(13));
+                else if (line.find("TpRemoveX=") == 0)
+                    g_TpRemoveX = std::stoi(line.substr(10));
+                else if (line.find("TpRemoveY=") == 0)
+                    g_TpRemoveY = std::stoi(line.substr(10));
             }
             file.close();
             

@@ -240,6 +240,28 @@ void SimulateSellJunkClick()
     SimulateClickAt(g_SellJunkX, g_SellJunkY);
 }
 
+void SimulateTradingPostClick()
+{
+    if (g_TradingPostX == 0 && g_TradingPostY == 0)
+    {
+        APIDefs->GUI_SendAlert("Trading Post position not set! Capture first");
+        return;
+    }
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Clicking Trading Post");
+    SimulateClickAt(g_TradingPostX, g_TradingPostY);
+}
+
+void SimulateTpRemoveClick()
+{
+    if (g_TpRemoveX == 0 && g_TpRemoveY == 0)
+    {
+        APIDefs->GUI_SendAlert("TP Remove position not set! Capture first");
+        return;
+    }
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Clicking TP Remove");
+    SimulateClickAt(g_TpRemoveX, g_TpRemoveY);
+}
+
 void SimulateMysticForgeCombo()
 {
     // Check both positions are set
@@ -358,4 +380,14 @@ void CaptureVendorPosition()
 void CaptureSellJunkPosition()
 {
     CapturePosition(g_SellJunkX, g_SellJunkY, "SELL JUNK");
+}
+
+void CaptureTradingPostPosition()
+{
+    CapturePosition(g_TradingPostX, g_TradingPostY, "TRADING POST");
+}
+
+void CaptureTpRemovePosition()
+{
+    CapturePosition(g_TpRemoveX, g_TpRemoveY, "TP REMOVE");
 }

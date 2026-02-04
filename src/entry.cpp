@@ -176,6 +176,18 @@ void AddonLoad(AddonAPI_t* aApi)
         "CTRL+J"
     );
     
+    APIDefs->InputBinds_RegisterWithString(
+        KB_TRADING_POST, 
+        ProcessKeybind, 
+        "CTRL+O"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_TP_REMOVE, 
+        ProcessKeybind, 
+        "CTRL+T"
+    );
+    
     // === GENERIC HOTKEYS (unassigned by default) ===
     APIDefs->InputBinds_RegisterWithString(
         KB_GENERIC_1, 
@@ -290,6 +302,18 @@ void AddonLoad(AddonAPI_t* aApi)
         KB_CAPTURE_SELL_JUNK, 
         ProcessKeybind, 
         "CTRL+SHIFT+J"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_TRADING_POST, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+O"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_TP_REMOVE, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+T"
     );
     
     APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Addon loaded!");

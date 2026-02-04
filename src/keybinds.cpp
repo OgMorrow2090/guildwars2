@@ -75,6 +75,14 @@ void ProcessKeybind(const char* aIdentifier, bool aIsRelease)
     {
         SimulateSellJunkClick();
     }
+    else if (strcmp(aIdentifier, KB_TRADING_POST) == 0)
+    {
+        SimulateTradingPostClick();
+    }
+    else if (strcmp(aIdentifier, KB_TP_REMOVE) == 0)
+    {
+        SimulateTpRemoveClick();
+    }
     // === GENERIC HOTKEYS ===
     else if (strcmp(aIdentifier, KB_GENERIC_1) == 0)
     {
@@ -152,5 +160,13 @@ void ProcessKeybind(const char* aIdentifier, bool aIsRelease)
     else if (strcmp(aIdentifier, KB_CAPTURE_SELL_JUNK) == 0)
     {
         CaptureSellJunkPosition();
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_TRADING_POST) == 0)
+    {
+        CaptureTradingPostPosition();
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_TP_REMOVE) == 0)
+    {
+        CaptureTpRemovePosition();
     }
 }

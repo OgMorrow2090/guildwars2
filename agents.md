@@ -1,6 +1,6 @@
 # Guild Wars 2 Addons - AI Agent Instructions
 
-<!-- markdownlint-disable MD022 MD032 MD031 MD040 -->
+<!-- markdownlint-disable MD022 MD024 MD031 MD032 MD036 MD040 MD060 -->
 
 > **⚠️ IMPORTANT: Always read readme.md first for complete project context before proceeding with any code changes.**
 >

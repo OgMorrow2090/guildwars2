@@ -25,6 +25,8 @@ Adds configurable hotkeys for inventory management actions that normally require
 | **Mystic Forge** | Ctrl+F | Click Mystic Forge combine button |
 | **Mystic Refill** | Ctrl+R | Click Mystic Forge refill button |
 | **Mystic Forge Combo** | Ctrl+A | Forge then Refill (100ms delay) |
+| **Vendor** | Ctrl+V | Click vendor button |
+| **Sell Junk** | Ctrl+J | Click sell junk button |
 | **Generic 1-5** | Ctrl+1/2 | User-assignable click hotkeys |
 
 | Capture Position | Default Key | Description |
@@ -36,6 +38,8 @@ Adds configurable hotkeys for inventory management actions that normally require
 | **Capture Yes Dialog** | Ctrl+Shift+P | Save Yes button location |
 | **Capture Mystic Forge** | Ctrl+Shift+F | Save Mystic Forge button location |
 | **Capture Mystic Refill** | Ctrl+Shift+R | Save Mystic Refill button location |
+| **Capture Vendor** | Ctrl+Shift+V | Save Vendor button location |
+| **Capture Sell Junk** | Ctrl+Shift+J | Save Sell Junk button location |
 | **Capture Generic 1-5** | Ctrl+Shift+1-5 | Save generic hotkey locations |
 
 All keybinds can be customized in Nexus Options (Ctrl+O → Keybinds).
@@ -78,6 +82,8 @@ This means you only need to capture positions **once per resolution** - switch b
 | Yes Dialog Hotkey | ✅ Working |
 | Mystic Forge Hotkeys | ✅ Working |
 | Mystic Forge Combo | ✅ Working |
+| Vendor Hotkey | ✅ Working |
+| Sell Junk Hotkey | ✅ Working |
 | Generic Hotkeys (5 slots) | ✅ Working |
 | Position Capture | ✅ Working |
 | Config Persistence | ✅ Working |

@@ -15,7 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Mystic Forge Hotkey** (Ctrl+F) - Click the Mystic Forge combine button
 - **Mystic Refill Hotkey** (Ctrl+R) - Click the Mystic Forge refill button
 - **Mystic Forge Combo** (Ctrl+A) - Forge then Refill with 100ms delay
-- **Capture keybinds** for new hotkeys (Ctrl+Shift+P/F/R)
+- **Vendor Hotkey** (Ctrl+V) - Click vendor button
+- **Sell Junk Hotkey** (Ctrl+J) - Click sell junk button at vendors
+- **Capture keybinds** for all new hotkeys (Ctrl+Shift+P/F/R/V/J)
 
 ### Changed
 
@@ -25,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Technical
 
-- Added 6 new position variables for Yes Dialog and Mystic Forge buttons
+- Added 10 new position variables for new hotkeys
 - All positions saved per-resolution in config files
 
 ## [1.2.0] - 2026-02-04
@@ -96,7 +98,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Date       | Highlights                                      |
 | ------- | ---------- | ----------------------------------------------- |
-| 1.3.0   | 2026-02-04 | Yes Dialog, Mystic Forge hotkeys, cleaner names |
+| 1.3.0   | 2026-02-04 | Mystic Forge, Vendor, Sell Junk, Yes Dialog     |
 | 1.2.0   | 2026-02-04 | Exit instance hotkey, 5 generic hotkeys         |
 | 1.1.0   | 2026-02-04 | Per-resolution configs, multi-device support    |
 | 1.0.0   | 2026-02-03 | Full release with all core features             |

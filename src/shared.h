@@ -22,6 +22,8 @@ constexpr const char* KB_YES_DIALOG = "YES_DIALOG";
 constexpr const char* KB_MYSTIC_FORGE = "MYSTIC_FORGE";
 constexpr const char* KB_MYSTIC_REFILL = "MYSTIC_REFILL";
 constexpr const char* KB_MYSTIC_FORGE_COMBO = "MYSTIC_FORGE_COMBO";
+constexpr const char* KB_VENDOR = "VENDOR";
+constexpr const char* KB_SELL_JUNK = "SELL_JUNK";
 
 // Keybind identifiers - Generic (user-assignable)
 constexpr const char* KB_GENERIC_1 = "GENERIC_1";
@@ -43,6 +45,8 @@ constexpr const char* KB_CAPTURE_GENERIC_5 = "CAPTURE_GENERIC_5";
 constexpr const char* KB_CAPTURE_YES_DIALOG = "CAPTURE_YES_DIALOG";
 constexpr const char* KB_CAPTURE_MYSTIC_FORGE = "CAPTURE_MYSTIC_FORGE";
 constexpr const char* KB_CAPTURE_MYSTIC_REFILL = "CAPTURE_MYSTIC_REFILL";
+constexpr const char* KB_CAPTURE_VENDOR = "CAPTURE_VENDOR";
+constexpr const char* KB_CAPTURE_SELL_JUNK = "CAPTURE_SELL_JUNK";
 
 // Keybind handler
 void ProcessKeybind(const char* aIdentifier, bool aIsRelease);
@@ -57,6 +61,8 @@ void SimulateYesDialogClick();
 void SimulateMysticForgeClick();
 void SimulateMysticRefillClick();
 void SimulateMysticForgeCombo();
+void SimulateVendorClick();
+void SimulateSellJunkClick();
 void SimulateGenericClick(int slot);
 void SimulateClickAt(int x, int y);
 void SimulateRightClickAt(int x, int y);
@@ -69,6 +75,8 @@ void CaptureExitInstancePosition();
 void CaptureYesDialogPosition();
 void CaptureMysticForgePosition();
 void CaptureMysticRefillPosition();
+void CaptureVendorPosition();
+void CaptureSellJunkPosition();
 void CaptureGenericPosition(int slot);
 
 // Config functions
@@ -102,3 +110,7 @@ extern int g_MysticForgeX;
 extern int g_MysticForgeY;
 extern int g_MysticRefillX;
 extern int g_MysticRefillY;
+extern int g_VendorX;
+extern int g_VendorY;
+extern int g_SellJunkX;
+extern int g_SellJunkY;

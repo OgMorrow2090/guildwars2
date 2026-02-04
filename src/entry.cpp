@@ -164,6 +164,18 @@ void AddonLoad(AddonAPI_t* aApi)
         "CTRL+A"
     );
     
+    APIDefs->InputBinds_RegisterWithString(
+        KB_VENDOR, 
+        ProcessKeybind, 
+        "CTRL+V"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_SELL_JUNK, 
+        ProcessKeybind, 
+        "CTRL+J"
+    );
+    
     // === GENERIC HOTKEYS (unassigned by default) ===
     APIDefs->InputBinds_RegisterWithString(
         KB_GENERIC_1, 
@@ -266,6 +278,18 @@ void AddonLoad(AddonAPI_t* aApi)
         KB_CAPTURE_MYSTIC_REFILL, 
         ProcessKeybind, 
         "CTRL+SHIFT+R"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_VENDOR, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+V"
+    );
+    
+    APIDefs->InputBinds_RegisterWithString(
+        KB_CAPTURE_SELL_JUNK, 
+        ProcessKeybind, 
+        "CTRL+SHIFT+J"
     );
     
     APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Addon loaded!");

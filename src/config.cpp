@@ -43,6 +43,10 @@ int g_MysticForgeX = 0;
 int g_MysticForgeY = 0;
 int g_MysticRefillX = 0;
 int g_MysticRefillY = 0;
+int g_VendorX = 0;
+int g_VendorY = 0;
+int g_SellJunkX = 0;
+int g_SellJunkY = 0;
 
 // Resolution tracking
 static int g_CurrentResWidth = 0;
@@ -184,6 +188,14 @@ void LoadButtonPositions()
             g_MysticRefillX = std::stoi(line.substr(14));
         else if (line.find("MysticRefillY=") == 0)
             g_MysticRefillY = std::stoi(line.substr(14));
+        else if (line.find("VendorX=") == 0)
+            g_VendorX = std::stoi(line.substr(8));
+        else if (line.find("VendorY=") == 0)
+            g_VendorY = std::stoi(line.substr(8));
+        else if (line.find("SellJunkX=") == 0)
+            g_SellJunkX = std::stoi(line.substr(10));
+        else if (line.find("SellJunkY=") == 0)
+            g_SellJunkY = std::stoi(line.substr(10));
     }
     
     file.close();
@@ -240,6 +252,10 @@ void SaveButtonPositions()
     file << "MysticForgeY=" << g_MysticForgeY << "\n";
     file << "MysticRefillX=" << g_MysticRefillX << "\n";
     file << "MysticRefillY=" << g_MysticRefillY << "\n";
+    file << "VendorX=" << g_VendorX << "\n";
+    file << "VendorY=" << g_VendorY << "\n";
+    file << "SellJunkX=" << g_SellJunkX << "\n";
+    file << "SellJunkY=" << g_SellJunkY << "\n";
     
     file.close();
     
@@ -291,6 +307,10 @@ void CheckResolutionChange()
         g_MysticForgeY = 0;
         g_MysticRefillX = 0;
         g_MysticRefillY = 0;
+        g_VendorX = 0;
+        g_VendorY = 0;
+        g_SellJunkX = 0;
+        g_SellJunkY = 0;
         
         // Load config for new resolution (if exists)
         g_CurrentResWidth = width;
@@ -352,6 +372,14 @@ void CheckResolutionChange()
                     g_MysticRefillX = std::stoi(line.substr(14));
                 else if (line.find("MysticRefillY=") == 0)
                     g_MysticRefillY = std::stoi(line.substr(14));
+                else if (line.find("VendorX=") == 0)
+                    g_VendorX = std::stoi(line.substr(8));
+                else if (line.find("VendorY=") == 0)
+                    g_VendorY = std::stoi(line.substr(8));
+                else if (line.find("SellJunkX=") == 0)
+                    g_SellJunkX = std::stoi(line.substr(10));
+                else if (line.find("SellJunkY=") == 0)
+                    g_SellJunkY = std::stoi(line.substr(10));
             }
             file.close();
             

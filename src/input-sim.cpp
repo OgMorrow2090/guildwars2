@@ -218,6 +218,28 @@ void SimulateMysticRefillClick()
     SimulateClickAt(g_MysticRefillX, g_MysticRefillY);
 }
 
+void SimulateVendorClick()
+{
+    if (g_VendorX == 0 && g_VendorY == 0)
+    {
+        APIDefs->GUI_SendAlert("Vendor position not set! Capture first");
+        return;
+    }
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Clicking Vendor");
+    SimulateClickAt(g_VendorX, g_VendorY);
+}
+
+void SimulateSellJunkClick()
+{
+    if (g_SellJunkX == 0 && g_SellJunkY == 0)
+    {
+        APIDefs->GUI_SendAlert("Sell Junk position not set! Capture first");
+        return;
+    }
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Clicking Sell Junk");
+    SimulateClickAt(g_SellJunkX, g_SellJunkY);
+}
+
 void SimulateMysticForgeCombo()
 {
     // Check both positions are set
@@ -326,4 +348,14 @@ void CaptureMysticForgePosition()
 void CaptureMysticRefillPosition()
 {
     CapturePosition(g_MysticRefillX, g_MysticRefillY, "MYSTIC REFILL");
+}
+
+void CaptureVendorPosition()
+{
+    CapturePosition(g_VendorX, g_VendorY, "VENDOR");
+}
+
+void CaptureSellJunkPosition()
+{
+    CapturePosition(g_SellJunkX, g_SellJunkY, "SELL JUNK");
 }

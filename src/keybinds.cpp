@@ -67,6 +67,14 @@ void ProcessKeybind(const char* aIdentifier, bool aIsRelease)
     {
         SimulateMysticForgeCombo();
     }
+    else if (strcmp(aIdentifier, KB_VENDOR) == 0)
+    {
+        SimulateVendorClick();
+    }
+    else if (strcmp(aIdentifier, KB_SELL_JUNK) == 0)
+    {
+        SimulateSellJunkClick();
+    }
     // === GENERIC HOTKEYS ===
     else if (strcmp(aIdentifier, KB_GENERIC_1) == 0)
     {
@@ -136,5 +144,13 @@ void ProcessKeybind(const char* aIdentifier, bool aIsRelease)
     else if (strcmp(aIdentifier, KB_CAPTURE_MYSTIC_REFILL) == 0)
     {
         CaptureMysticRefillPosition();
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_VENDOR) == 0)
+    {
+        CaptureVendorPosition();
+    }
+    else if (strcmp(aIdentifier, KB_CAPTURE_SELL_JUNK) == 0)
+    {
+        CaptureSellJunkPosition();
     }
 }

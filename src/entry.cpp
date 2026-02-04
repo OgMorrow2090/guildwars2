@@ -53,12 +53,12 @@ extern "C" __declspec(dllexport) AddonDefinition_t* GetAddonDef()
     
     // Addon metadata
     AddonDef.Name = "Inventory Hotkeys";
-    AddonDef.Version.Major = 0;
-    AddonDef.Version.Minor = 1;
+    AddonDef.Version.Major = 1;
+    AddonDef.Version.Minor = 2;
     AddonDef.Version.Build = 0;
     AddonDef.Version.Revision = 0;
     AddonDef.Author = "OgMorrow2090";
-    AddonDef.Description = "Hotkeys for Deposit All Materials and Sort Inventory buttons.";
+    AddonDef.Description = "Hotkeys for inventory actions with per-resolution config support.";
     
     // Callbacks
     AddonDef.Load = AddonLoad;

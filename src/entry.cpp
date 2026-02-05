@@ -54,7 +54,7 @@ extern "C" __declspec(dllexport) AddonDefinition_t* GetAddonDef()
     // Addon metadata
     AddonDef.Name = "Inventory Hotkeys";
     AddonDef.Version.Major = 1;
-    AddonDef.Version.Minor = 3;
+    AddonDef.Version.Minor = 4;
     AddonDef.Version.Build = 0;
     AddonDef.Version.Revision = 0;
     AddonDef.Author = "OgMorrow2090";
@@ -109,216 +109,35 @@ void AddonLoad(AddonAPI_t* aApi)
         APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Game window found successfully!");
     }
     
-    // === ACTION KEYBINDS ===
-    APIDefs->InputBinds_RegisterWithString(
-        KB_DEPOSIT_MATERIALS, 
-        ProcessKeybind, 
-        "CTRL+D"
-    );
+    // 13 action keybinds
+    APIDefs->InputBinds_RegisterWithString(DEPOSIT_MATERIALS, ProcessKeybind, "CTRL+D");
+    APIDefs->InputBinds_RegisterWithString(SORT_INVENTORY, ProcessKeybind, "CTRL+S");
+    APIDefs->InputBinds_RegisterWithString(OPEN_CHEST, ProcessKeybind, "CTRL+B");
+    APIDefs->InputBinds_RegisterWithString(DEPOSIT_AND_SORT, ProcessKeybind, "CTRL+Q");
+    APIDefs->InputBinds_RegisterWithString(SELL_JUNK, ProcessKeybind, "CTRL+J");
+    APIDefs->InputBinds_RegisterWithString(TRADING_POST, ProcessKeybind, "CTRL+O");
+    APIDefs->InputBinds_RegisterWithString(VENDOR_BUY, ProcessKeybind, "CTRL+U");
+    APIDefs->InputBinds_RegisterWithString(EXIT_INSTANCE, ProcessKeybind, "CTRL+E");
+    APIDefs->InputBinds_RegisterWithString(YES_DIALOG, ProcessKeybind, "CTRL+Y");
+    APIDefs->InputBinds_RegisterWithString(MYSTIC_FORGE, ProcessKeybind, "CTRL+F");
+    APIDefs->InputBinds_RegisterWithString(MYSTIC_REFILL, ProcessKeybind, "CTRL+R");
+    APIDefs->InputBinds_RegisterWithString(MYSTIC_FORGE_COMBO, ProcessKeybind, "CTRL+M");
+    APIDefs->InputBinds_RegisterWithString(TP_REMOVE, ProcessKeybind, "CTRL+T");
     
-    APIDefs->InputBinds_RegisterWithString(
-        KB_SORT_INVENTORY, 
-        ProcessKeybind, 
-        "CTRL+C"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_OPEN_CHEST, 
-        ProcessKeybind, 
-        "CTRL+B"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_DEPOSIT_AND_SORT, 
-        ProcessKeybind, 
-        "CTRL+Q"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_EXIT_INSTANCE, 
-        ProcessKeybind, 
-        "CTRL+E"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_YES_DIALOG, 
-        ProcessKeybind, 
-        "CTRL+P"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_MYSTIC_FORGE, 
-        ProcessKeybind, 
-        "CTRL+F"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_MYSTIC_REFILL, 
-        ProcessKeybind, 
-        "CTRL+R"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_MYSTIC_FORGE_COMBO, 
-        ProcessKeybind, 
-        "CTRL+A"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_VENDOR, 
-        ProcessKeybind, 
-        "CTRL+V"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_SELL_JUNK, 
-        ProcessKeybind, 
-        "CTRL+J"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_TRADING_POST, 
-        ProcessKeybind, 
-        "CTRL+O"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_TP_REMOVE, 
-        ProcessKeybind, 
-        "CTRL+T"
-    );
-    
-    // === GENERIC HOTKEYS (unassigned by default) ===
-    APIDefs->InputBinds_RegisterWithString(
-        KB_GENERIC_1, 
-        ProcessKeybind, 
-        "CTRL+1"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_GENERIC_2, 
-        ProcessKeybind, 
-        "CTRL+2"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_GENERIC_3, 
-        ProcessKeybind, 
-        "(null)"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_GENERIC_4, 
-        ProcessKeybind, 
-        "(null)"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_GENERIC_5, 
-        ProcessKeybind, 
-        "(null)"
-    );
-    
-    // === CAPTURE KEYBINDS ===
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_DEPOSIT, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+D"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_SORT, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+C"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_CHEST, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+B"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_EXIT_INSTANCE, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+E"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_GENERIC_1, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+1"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_GENERIC_2, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+2"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_GENERIC_3, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+3"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_GENERIC_4, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+4"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_GENERIC_5, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+5"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_YES_DIALOG, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+P"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_MYSTIC_FORGE, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+F"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_MYSTIC_REFILL, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+R"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_VENDOR, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+V"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_SELL_JUNK, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+J"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_TRADING_POST, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+O"
-    );
-    
-    APIDefs->InputBinds_RegisterWithString(
-        KB_CAPTURE_TP_REMOVE, 
-        ProcessKeybind, 
-        "CTRL+SHIFT+T"
-    );
-    
-    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Addon loaded!");
-    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Actions: Alt+D (Deposit), Alt+C (Compact), Alt+B (Chest)");
-    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Capture: Ctrl+Shift+D/C/B to set positions");
+    // 11 capture keybinds
+    APIDefs->InputBinds_RegisterWithString(CAPTURE_DEPOSIT, ProcessKeybind, "CTRL+SHIFT+D");
+    APIDefs->InputBinds_RegisterWithString(CAPTURE_SORT, ProcessKeybind, "CTRL+SHIFT+S");
+    APIDefs->InputBinds_RegisterWithString(CAPTURE_CHEST, ProcessKeybind, "CTRL+SHIFT+B");
+    APIDefs->InputBinds_RegisterWithString(CAPTURE_EXIT_INSTANCE, ProcessKeybind, "CTRL+SHIFT+E");
+    APIDefs->InputBinds_RegisterWithString(CAPTURE_YES_DIALOG, ProcessKeybind, "CTRL+SHIFT+Y");
+    APIDefs->InputBinds_RegisterWithString(CAPTURE_MYSTIC_FORGE, ProcessKeybind, "CTRL+SHIFT+F");
+    APIDefs->InputBinds_RegisterWithString(CAPTURE_MYSTIC_REFILL, ProcessKeybind, "CTRL+SHIFT+R");
+    APIDefs->InputBinds_RegisterWithString(CAPTURE_VENDOR_BUY, ProcessKeybind, "CTRL+SHIFT+U");
+    APIDefs->InputBinds_RegisterWithString(CAPTURE_SELL_JUNK, ProcessKeybind, "CTRL+SHIFT+J");
+    APIDefs->InputBinds_RegisterWithString(CAPTURE_TRADING_POST, ProcessKeybind, "CTRL+SHIFT+O");
+    APIDefs->InputBinds_RegisterWithString(CAPTURE_TP_REMOVE, ProcessKeybind, "CTRL+SHIFT+T");
+
+    APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Addon loaded - 24 keybinds.");
 }
 
 /**
@@ -329,40 +148,34 @@ void AddonLoad(AddonAPI_t* aApi)
 void AddonUnload()
 {
     // Deregister action keybinds
-    APIDefs->InputBinds_Deregister(KB_DEPOSIT_MATERIALS);
-    APIDefs->InputBinds_Deregister(KB_SORT_INVENTORY);
-    APIDefs->InputBinds_Deregister(KB_OPEN_CHEST);
-    APIDefs->InputBinds_Deregister(KB_DEPOSIT_AND_SORT);
-    APIDefs->InputBinds_Deregister(KB_EXIT_INSTANCE);
-    APIDefs->InputBinds_Deregister(KB_YES_DIALOG);
-    APIDefs->InputBinds_Deregister(KB_MYSTIC_FORGE);
-    APIDefs->InputBinds_Deregister(KB_MYSTIC_REFILL);
-    APIDefs->InputBinds_Deregister(KB_MYSTIC_FORGE_COMBO);
-    
-    // Deregister generic keybinds
-    APIDefs->InputBinds_Deregister(KB_GENERIC_1);
-    APIDefs->InputBinds_Deregister(KB_GENERIC_2);
-    APIDefs->InputBinds_Deregister(KB_GENERIC_3);
-    APIDefs->InputBinds_Deregister(KB_GENERIC_4);
-    APIDefs->InputBinds_Deregister(KB_GENERIC_5);
+    APIDefs->InputBinds_Deregister(DEPOSIT_MATERIALS);
+    APIDefs->InputBinds_Deregister(SORT_INVENTORY);
+    APIDefs->InputBinds_Deregister(OPEN_CHEST);
+    APIDefs->InputBinds_Deregister(DEPOSIT_AND_SORT);
+    APIDefs->InputBinds_Deregister(SELL_JUNK);
+    APIDefs->InputBinds_Deregister(TRADING_POST);
+    APIDefs->InputBinds_Deregister(VENDOR_BUY);
+    APIDefs->InputBinds_Deregister(EXIT_INSTANCE);
+    APIDefs->InputBinds_Deregister(YES_DIALOG);
+    APIDefs->InputBinds_Deregister(MYSTIC_FORGE);
+    APIDefs->InputBinds_Deregister(MYSTIC_REFILL);
+    APIDefs->InputBinds_Deregister(MYSTIC_FORGE_COMBO);
+    APIDefs->InputBinds_Deregister(TP_REMOVE);
     
     // Deregister capture keybinds
-    APIDefs->InputBinds_Deregister(KB_CAPTURE_DEPOSIT);
-    APIDefs->InputBinds_Deregister(KB_CAPTURE_SORT);
-    APIDefs->InputBinds_Deregister(KB_CAPTURE_CHEST);
-    APIDefs->InputBinds_Deregister(KB_CAPTURE_EXIT_INSTANCE);
-    APIDefs->InputBinds_Deregister(KB_CAPTURE_GENERIC_1);
-    APIDefs->InputBinds_Deregister(KB_CAPTURE_GENERIC_2);
-    APIDefs->InputBinds_Deregister(KB_CAPTURE_GENERIC_3);
-    APIDefs->InputBinds_Deregister(KB_CAPTURE_GENERIC_4);
-    APIDefs->InputBinds_Deregister(KB_CAPTURE_GENERIC_5);
-    APIDefs->InputBinds_Deregister(KB_CAPTURE_YES_DIALOG);
-    APIDefs->InputBinds_Deregister(KB_CAPTURE_MYSTIC_FORGE);
-    APIDefs->InputBinds_Deregister(KB_CAPTURE_MYSTIC_REFILL);
+    APIDefs->InputBinds_Deregister(CAPTURE_DEPOSIT);
+    APIDefs->InputBinds_Deregister(CAPTURE_SORT);
+    APIDefs->InputBinds_Deregister(CAPTURE_CHEST);
+    APIDefs->InputBinds_Deregister(CAPTURE_EXIT_INSTANCE);
+    APIDefs->InputBinds_Deregister(CAPTURE_YES_DIALOG);
+    APIDefs->InputBinds_Deregister(CAPTURE_MYSTIC_FORGE);
+    APIDefs->InputBinds_Deregister(CAPTURE_MYSTIC_REFILL);
+    APIDefs->InputBinds_Deregister(CAPTURE_VENDOR_BUY);
+    APIDefs->InputBinds_Deregister(CAPTURE_SELL_JUNK);
+    APIDefs->InputBinds_Deregister(CAPTURE_TRADING_POST);
+    APIDefs->InputBinds_Deregister(CAPTURE_TP_REMOVE);
     
     APIDefs->Log(LOGL_INFO, "InventoryHotkeys", "Addon unloaded.");
-    
-    // Clear global state
     APIDefs = nullptr;
     GameWindow = nullptr;
 }

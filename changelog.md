@@ -7,6 +7,35 @@ All notable changes to Guild Wars 2 Addons will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-02-05
+
+### Fixed
+
+- **BlishHUD/Nexus GG compatibility** - Fixed keybind conflict that prevented other addons from receiving keyboard input
+- **Reserved name conflict** - Renamed "VENDOR" to "VENDOR_BUY" to avoid Nexus internal name collision
+
+### Changed
+
+- **Updated default keybinds** - All actions now use CTRL+key, captures use CTRL+SHIFT+key
+  - CTRL+D: Deposit Materials
+  - CTRL+S: Sort Inventory
+  - CTRL+B: Open Chest
+  - CTRL+Q: Deposit & Sort
+  - CTRL+J: Sell Junk
+  - CTRL+O: Trading Post
+  - CTRL+U: Vendor (changed from CTRL+V to avoid paste conflict)
+  - CTRL+E: Exit Instance
+  - CTRL+Y: Yes Dialog
+  - CTRL+F: Mystic Forge
+  - CTRL+R: Mystic Refill
+  - CTRL+M: Mystic Forge Combo
+  - CTRL+T: TP Remove
+
+### Technical
+
+- Discovered "VENDOR" is a reserved/conflicting identifier in Nexus
+- All 24 keybinds (13 actions + 11 captures) now work without breaking other addons
+
 ## [1.3.0] - 2026-02-04
 
 ### Added

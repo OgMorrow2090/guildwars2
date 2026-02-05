@@ -13,44 +13,32 @@ extern AddonDefinition_t AddonDef;
 extern HWND GameWindow;
 
 // Keybind identifiers - Actions
-constexpr const char* KB_DEPOSIT_MATERIALS = "DEPOSIT_MATERIALS";
-constexpr const char* KB_SORT_INVENTORY = "SORT_INVENTORY";
-constexpr const char* KB_OPEN_CHEST = "OPEN_CHEST";
-constexpr const char* KB_DEPOSIT_AND_SORT = "DEPOSIT_AND_SORT";
-constexpr const char* KB_EXIT_INSTANCE = "EXIT_INSTANCE";
-constexpr const char* KB_YES_DIALOG = "YES_DIALOG";
-constexpr const char* KB_MYSTIC_FORGE = "MYSTIC_FORGE";
-constexpr const char* KB_MYSTIC_REFILL = "MYSTIC_REFILL";
-constexpr const char* KB_MYSTIC_FORGE_COMBO = "MYSTIC_FORGE_COMBO";
-constexpr const char* KB_VENDOR = "VENDOR";
-constexpr const char* KB_SELL_JUNK = "SELL_JUNK";
-constexpr const char* KB_TRADING_POST = "TRADING_POST";
-constexpr const char* KB_TP_REMOVE = "TP_REMOVE";
-
-// Keybind identifiers - Generic (user-assignable)
-constexpr const char* KB_GENERIC_1 = "GENERIC_1";
-constexpr const char* KB_GENERIC_2 = "GENERIC_2";
-constexpr const char* KB_GENERIC_3 = "GENERIC_3";
-constexpr const char* KB_GENERIC_4 = "GENERIC_4";
-constexpr const char* KB_GENERIC_5 = "GENERIC_5";
+constexpr const char* DEPOSIT_MATERIALS = "DEPOSIT_MATERIALS";
+constexpr const char* SORT_INVENTORY = "SORT_INVENTORY";
+constexpr const char* OPEN_CHEST = "OPEN_CHEST";
+constexpr const char* DEPOSIT_AND_SORT = "DEPOSIT_AND_SORT";
+constexpr const char* EXIT_INSTANCE = "EXIT_INSTANCE";
+constexpr const char* YES_DIALOG = "YES_DIALOG";
+constexpr const char* MYSTIC_FORGE = "MYSTIC_FORGE";
+constexpr const char* MYSTIC_REFILL = "MYSTIC_REFILL";
+constexpr const char* MYSTIC_FORGE_COMBO = "MYSTIC_FORGE_COMBO";
+constexpr const char* VENDOR_BUY = "VENDOR_BUY";
+constexpr const char* SELL_JUNK = "SELL_JUNK";
+constexpr const char* TRADING_POST = "TRADING_POST";
+constexpr const char* TP_REMOVE = "TP_REMOVE";
 
 // Keybind identifiers - Capture positions
-constexpr const char* KB_CAPTURE_DEPOSIT = "CAPTURE_DEPOSIT";
-constexpr const char* KB_CAPTURE_SORT = "CAPTURE_SORT";
-constexpr const char* KB_CAPTURE_CHEST = "CAPTURE_CHEST";
-constexpr const char* KB_CAPTURE_EXIT_INSTANCE = "CAPTURE_EXIT_INSTANCE";
-constexpr const char* KB_CAPTURE_GENERIC_1 = "CAPTURE_GENERIC_1";
-constexpr const char* KB_CAPTURE_GENERIC_2 = "CAPTURE_GENERIC_2";
-constexpr const char* KB_CAPTURE_GENERIC_3 = "CAPTURE_GENERIC_3";
-constexpr const char* KB_CAPTURE_GENERIC_4 = "CAPTURE_GENERIC_4";
-constexpr const char* KB_CAPTURE_GENERIC_5 = "CAPTURE_GENERIC_5";
-constexpr const char* KB_CAPTURE_YES_DIALOG = "CAPTURE_YES_DIALOG";
-constexpr const char* KB_CAPTURE_MYSTIC_FORGE = "CAPTURE_MYSTIC_FORGE";
-constexpr const char* KB_CAPTURE_MYSTIC_REFILL = "CAPTURE_MYSTIC_REFILL";
-constexpr const char* KB_CAPTURE_VENDOR = "CAPTURE_VENDOR";
-constexpr const char* KB_CAPTURE_SELL_JUNK = "CAPTURE_SELL_JUNK";
-constexpr const char* KB_CAPTURE_TRADING_POST = "CAPTURE_TRADING_POST";
-constexpr const char* KB_CAPTURE_TP_REMOVE = "CAPTURE_TP_REMOVE";
+constexpr const char* CAPTURE_DEPOSIT = "CAPTURE_DEPOSIT";
+constexpr const char* CAPTURE_SORT = "CAPTURE_SORT";
+constexpr const char* CAPTURE_CHEST = "CAPTURE_CHEST";
+constexpr const char* CAPTURE_EXIT_INSTANCE = "CAPTURE_EXIT_INSTANCE";
+constexpr const char* CAPTURE_YES_DIALOG = "CAPTURE_YES_DIALOG";
+constexpr const char* CAPTURE_MYSTIC_FORGE = "CAPTURE_MYSTIC_FORGE";
+constexpr const char* CAPTURE_MYSTIC_REFILL = "CAPTURE_MYSTIC_REFILL";
+constexpr const char* CAPTURE_VENDOR_BUY = "CAPTURE_VENDOR_BUY";
+constexpr const char* CAPTURE_SELL_JUNK = "CAPTURE_SELL_JUNK";
+constexpr const char* CAPTURE_TRADING_POST = "CAPTURE_TRADING_POST";
+constexpr const char* CAPTURE_TP_REMOVE = "CAPTURE_TP_REMOVE";
 
 // Keybind handler
 void ProcessKeybind(const char* aIdentifier, bool aIsRelease);

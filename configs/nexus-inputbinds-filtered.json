@@ -1,0 +1,128 @@
+[
+    {
+        "Alt":  false,
+        "Code":  37,
+        "Ctrl":  true,
+        "Identifier":  "Copy KP ID to clipboard",
+        "Passthrough":  false,
+        "Shift":  true,
+        "Type":  1
+    },
+    {
+        "Alt":  false,
+        "Code":  0,
+        "Ctrl":  false,
+        "Identifier":  "CursorAnchor.Center",
+        "Passthrough":  false,
+        "Shift":  false,
+        "Type":  0
+    },
+    {
+        "Alt":  false,
+        "Code":  0,
+        "Ctrl":  false,
+        "Identifier":  "KB_ADDONS",
+        "Passthrough":  false,
+        "Shift":  false,
+        "Type":  0
+    },
+    {
+        "Alt":  false,
+        "Code":  0,
+        "Ctrl":  false,
+        "Identifier":  "KB_DEBUG",
+        "Passthrough":  false,
+        "Shift":  false,
+        "Type":  0
+    },
+    {
+        "Alt":  false,
+        "Code":  0,
+        "Ctrl":  false,
+        "Identifier":  "KB_LOG",
+        "Passthrough":  false,
+        "Shift":  false,
+        "Type":  0
+    },
+    {
+        "Alt":  false,
+        "Code":  0,
+        "Ctrl":  false,
+        "Identifier":  "KB_MENU",
+        "Passthrough":  false,
+        "Shift":  false,
+        "Type":  0
+    },
+    {
+        "Alt":  false,
+        "Code":  0,
+        "Ctrl":  false,
+        "Identifier":  "KB_MUMBLEOVERLAY",
+        "Passthrough":  false,
+        "Shift":  false,
+        "Type":  0
+    },
+    {
+        "Alt":  false,
+        "Code":  0,
+        "Ctrl":  false,
+        "Identifier":  "KB_OPTIONS",
+        "Passthrough":  false,
+        "Shift":  false,
+        "Type":  0
+    },
+    {
+        "Alt":  false,
+        "Code":  52,
+        "Ctrl":  true,
+        "Identifier":  "KB_SUDOKU",
+        "Passthrough":  false,
+        "Shift":  false,
+        "Type":  1
+    },
+    {
+        "Alt":  false,
+        "Code":  35,
+        "Ctrl":  true,
+        "Identifier":  "KB_TOGGLEHIDEUI",
+        "Passthrough":  false,
+        "Shift":  false,
+        "Type":  1
+    },
+    {
+        "Alt":  false,
+        "Code":  0,
+        "Ctrl":  false,
+        "Identifier":  "KEY_BOSSES_TOGGLE_NOTIFICATION",
+        "Passthrough":  false,
+        "Shift":  false,
+        "Type":  0
+    },
+    {
+        "Alt":  false,
+        "Code":  0,
+        "Ctrl":  false,
+        "Identifier":  "KEY_BOSSES_TOGGLE_RENDER",
+        "Passthrough":  false,
+        "Shift":  false,
+        "Type":  0
+    },
+    {
+        "Alt":  false,
+        "Code":  0,
+        "Ctrl":  false,
+        "Identifier":  "Open search",
+        "Passthrough":  false,
+        "Shift":  false,
+        "Type":  0
+    },
+    {
+        "Alt":  false,
+        "Code":  45,
+        "Ctrl":  true,
+        "Identifier":  "Show details of a hovered item",
+        "Passthrough":  false,
+        "Shift":  true,
+        "Type":  1
+    }
+]

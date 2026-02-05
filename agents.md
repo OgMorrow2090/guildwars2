@@ -192,6 +192,23 @@ unsigned uiSize = ml->Identity.UISize;
 - Don't block the render thread
 - Use async operations for any delays
 
+## ⚠️ NEXUS RESERVED NAMES
+
+### **Known Conflicting Identifiers**
+
+The following keybind identifier names conflict with Nexus internals and will break keyboard input for other addons (BlishHUD, Nexus GG, etc.):
+
+| Reserved Name | Use Instead | Notes |
+|---------------|-------------|-------|
+| `VENDOR` | `VENDOR_BUY` | Causes input blocking for all other addons |
+
+### **Best Practices for Keybind Names**
+
+- Use descriptive, unique names with prefixes (e.g., `INVHK_DEPOSIT_MATERIALS`)
+- Avoid single common words that might be reserved internally
+- Test with BlishHUD chat shortcuts to verify no input blocking
+- If adding a new keybind breaks other addons, try renaming it
+
 ## 📋 CODING STANDARDS
 
 ### **Deployment Path (Steam)**

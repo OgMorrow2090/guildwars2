@@ -253,6 +253,26 @@ APIDefs->Log(ELogLevel_INFO, "InventoryHotkeys", "Addon loaded successfully");
 APIDefs->Log(ELogLevel_WARNING, "InventoryHotkeys", "Could not detect inventory position");
 ```
 
+## 🔒 Security Audit & Hardening (MANDATORY)
+
+**As part of every session cleanup, AI agents MUST perform a security audit and harden any code created or modified during the session.**
+
+**When to Execute:**
+- During every session cleanup (before final commit)
+- After creating new C++ code that handles memory, input, or API calls
+- When user says **"SECURITY AUDIT"** or **"HARDEN"**
+
+**Security Audit Checklist:**
+
+1. **Null Pointer Checks**: Always validate API return values before use
+2. **Buffer Safety**: Validate string lengths, use safe string functions
+3. **Memory Management**: Clean up all resources in `AddonUnload()`, no memory leaks
+4. **Input Validation**: Validate keybind identifiers and configuration values
+5. **ArenaNet ToS**: Verify no automation or multi-action macros (1:1 input only)
+6. **DLL Safety**: No thread blocking, proper async handling
+
+**Reporting**: After audit, report findings as CRITICAL/HIGH/MEDIUM/LOW with fixes applied.
+
 ## 🧹 Session Cleanup Protocol
 
 ### **When to Execute Session Cleanup**

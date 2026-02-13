@@ -288,6 +288,10 @@ AI agents should initiate session cleanup when the user mentions:
 - Remove debugging statements and temporary test code
 - Update all documentation (changelog.md, readme.md, roadmap.md)
 - Ensure code compiles without warnings
+- **Bump version/build numbers**: If any code was changed during the session:
+  - Bump version in `AddonDef.Version` and changelog.md
+  - Update changelog.md with entry documenting all changes made this session
+- **Deploy if changed**: After building, copy DLL to GW2 addons folder for testing
 - Stage, commit, and push all changes with descriptive messages
 - Prepare workspace for clean start
 
